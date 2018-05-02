@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<title>Document</title>
+	<script>
+	//根据屏幕大小设置html根元素的字体大小，通过psd文件的尺寸及手机屏幕的大小来计算html的字体大小作为rem的基准值，字体的大小、图片的宽度、高度、padding、margin等都通过该值来转换
+	(function () {
+		var html = document.documentElement;
+		//var width = html.getBoundingClientRect().width;
+		var width = html.clientWidth;
+		var fs = width/10.8;  //该psd文件的宽尺寸是1080px，除以10.8表示1rem即100px，psd像素一般是740*1136、1080*1920、1600合适，在谷歌浏览器-F12-手机端-选择response，将宽度改为1080时，html的font-szie为100px
+		html.style.fontSize = fs+"px";
+	})()
+</script>
+<link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+	<header id="header"></header>
+	<div id="main">
+		<!-- 下拉滑动的区域 swiper -->
+		<div id="swiper">
+			<!-- 下拉加载刷新 -->
+			<div id="load">
+				<span class="loadImg"></span>
+				<span class="loadImg2"></span>
+				<span class="loadText">下拉刷新</span>
+			</div>
+			<ul id="list">
+				<!-- 左右滑动的区域 li-->
+				<!-- <li>
+					<div class="swiper">
+						<div class="view">
+							<span class="avatar"></span>
+							<div class="info">
+								<h3>李平</h3>
+								<p>你有一条新消息，请注意查收！</p>
+							</div>
+							<aside class="aside">
+								<time>2018-03-29</time>
+								<mark>1</mark>
+							</aside>
+						</div>
+						<nav class="btns">
+							<a href="javascript:void(0);">置顶</a>
+							<a href="javascript:void(0);">标记已读</a>
+							<a href="javascript:void(0);">删除</a>
+						</nav>
+					</div>
+				</li> -->
+			</ul>
+		</div>
+	</div>
+	<footer id="footer"></footer>
+	<script type="text/javascript" src="js/tool.js"></script>
+	<!-- <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.1-rc2/jquery.js"></script> -->
+	<script type="text/javascript" src="js/index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>现场辅助功能</title>
+    <style>
+        *{ margin:0; padding:0}
+        .zhuotit{ font-size:20px; background:#006699; color:#fff; padding:5px;}
+
+        .zhuoinfo{ font-size:14px; margin:2px;}
+        .zhuoinfo span{ padding:5px; border:1px solid #000; line-height:40px; margin-left:2px; font-size:12px;}
+    </style>
+
+
+</head>
+<body>
+    <p style="line-height:40px;">总座位：{$seatAll} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已入座：{$isseat} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未入座：{$seatAll-$isseat}</p>
+    {volist name='seatNum' id='vo' empty="暂时没有数据"}
+    <div style="width:49%; margin-left:0.5%; float:left">
+        <p class="zhuotit">
+            {$key}号桌
+        </p>
+        <div class="zhuoinfo">
+            {volist name='vo' id='vo1' empty="暂时没有数据"}
+            {eq name="vo1.ison" value="1"}
+            <span style="color:red;cursor:pointer;" >{$vo1.number}</span>
+            {else/}
+            <span>{$vo1.number}</span>
+            {/eq}
+            {/volist}
+        </div>
+    </div>
+    {/volist}
+</body>
+</html>

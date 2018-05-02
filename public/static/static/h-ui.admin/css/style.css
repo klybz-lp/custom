@@ -1,0 +1,182 @@
+@charset "utf-8";
+/* 座位管理 */
+h2 { font-size: 26px; padding: 0 0 10px 0; }
+p {
+    padding: 5px 0 10px 0;
+}
+#page-intro {
+    font-size: 17px;
+}
+.content-box,
+.content-box-header,
+ul.content-box-tabs li a.current,
+.shortcut-button,
+.notification {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.content-box-header {
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.closed-box .content-box-header {
+    -moz-border-radius-bottomleft: 6px;
+    -moz-border-radius-bottomright: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+ul.content-box-tabs li a.current {
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+.shortcut-button span {
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+
+div.wysiwyg ul.panel li a { opacity: 0.6; }
+div.wysiwyg ul.panel li a:hover, div.wysiwyg ul.panel li a.active { opacity: 0.99; }
+.content-box {
+    border: 1px solid #ccc;
+    margin: 0 0 20px 0;
+    background: #fff;
+    overflow: hidden;
+}
+
+.content-box-header {
+    background: #e5e5e5 url('../images/bg-content-box.gif') top left repeat-x;
+    margin-top: 1px;
+    height: 40px;
+}
+
+.content-box-header h3 {
+    padding: 12px 15px 10px;
+    float: left;
+}
+
+ul.content-box-tabs {
+    float: right;
+    padding: 4px 15px 0 0 !important;
+    margin: 0 !important;
+}
+
+ul.content-box-tabs li {
+    float: left;
+    margin: 0;
+    padding: 0 !important;
+    background-image: none !important;
+}
+
+ul.content-box-tabs li a {
+    color: #333;
+    padding: 8px 10px;
+    display: block;
+    margin: 1px;
+    border-bottom: 0;
+}
+
+ul.content-box-tabs li a:hover {
+    color: #57a000;
+}
+
+ul.content-box-tabs li a.current {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    margin: 0;
+}
+
+.content-box-content {
+    padding: 20px;
+    font-size: 13px;
+    border-top: 1px solid #ccc;
+}
+
+/************ Table ************/
+
+#main-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#main-content table thead th {
+    font-weight: bold;
+    font-size: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#main-content tbody {
+    border-bottom: 1px solid #ddd;
+}
+
+#main-content tbody tr {
+    background: #fff;
+}
+
+#main-content tbody tr.alt-row {
+    background: #fff;
+}
+
+#main-content table td,
+#main-content table th {
+    padding: 10px;
+    line-height: 1.3em;
+}
+
+#main-content table tfoot td .bulk-actions {
+    padding: 15px 0 5px 0;
+}
+
+#main-content table tfoot td .bulk-actions select {
+    padding: 4px;
+    border: 1px solid #ccc;
+}
+/************ Lists ************/
+
+#main-content ul,
+#main-content ol {
+    padding: 10px 0;
+}
+
+/* Unordered List */
+
+#main-content ul li {
+    background: url('../images/icons/bullet_black.png') center left no-repeat;
+    padding: 4px 0 4px 20px;
+}
+
+/* Ordered List */
+
+#main-content ol {
+    padding: 0 0 0 24px;
+}
+
+#main-content ol li {
+    list-style: decimal;
+    padding: 4px 0;
+}
+.zhuotit{ font-size:20px; background:#006699; color:#fff; padding:10px;}
+
+.zhuoinfo{ font-size:14px; margin:4px;}
+.zhuoinfo span{ padding:5px; border:1px solid #000; line-height:50px; margin-left:10px;}
+.cansit{cursor:pointer}
+table,.table-bordered{border-collapse: collapse !important;}
+
+

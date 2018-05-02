@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{$title}</title>
+</head>
+<body>
+    {include head.html}
+    <p>{#$title#}</p>
+	{foreach $data as $value}
+	<p>{$value}</p>
+	{/foreach}
+
+	{foreach $score as $key=>$value}
+	<p>{$key}||{$value}</p>
+	{/foreach}
+
+    {foreach $cj as $value}
+	{foreach $value as $key=>$v}
+	<p>{$key}||{$v}</p>
+	{/foreach}
+	{/foreach}
+
+	{if $number>0}
+	<p>{$number}大于0</p>
+	{elseif $number==0}
+	<p>{$number}等于0</p>
+	{else}
+	<p>{$number}小于0</p>
+	{/if}
+
+
+</body>
+</html>

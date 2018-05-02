@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>正在为您转接，请稍等！</title>
+</head>
+
+<body>
+    <p onclick="swt_hm('dd')">点击</p>
+</body>
+
+</html>
+<script>
+function swt_hm(text) {
+
+
+    ksChatLink = 'https://gyak.kuaishang.cn/bs/im.htm?cas=8678___523480&fi=9916&ism=1';
+
+    //var ksUserDefinedOpenNewChatWin=true;  //设置是否新窗口打开快商通页面
+
+    //验证参数是否存在
+
+    function checkQueryString(params, name) {
+
+        if (!params) return false;
+
+        return new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i").test(params);
+
+    }
+
+    //获取URL参数值
+
+    function getQueryString(url, name) {
+
+        var index = url.indexOf('?');
+
+        if (index == -1) return '';
+
+        url = url.substr(index + 1, url.length);
+
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+
+        var r = url.match(reg);
+
+        if (r != null) return (r[2]);
+
+        return '';
+
+    }
+
+    var openNewChatWin;  //新窗口打快咨询链接
+
+    var localArr = ksChatLink.split("?");  //split()方法用于把一个字符串分割成字符串数组
+    //console.log(localArr.length);  // 结果是["https://gyak.kuaishang.cn/bs/im.htm", "cas=8678___523480&fi=9916&ism=1"]
+
+    localArr.push("");  //可向数组的末尾添加一个或多个元素，并返回新的长度
+    //console.log(localArr);
+
+    if (typeof ksUserDefinedOpenNewChatWin != 'undefined' && ksUserDefinedOpenNewChatWin == true) {
+
+        openNewChatWin = true;
+
+    } else if (checkQueryString(localArr[1], 'ism')) {  //手机端不需要新窗口打开链接
+
+        openNewChatWin = false;
+
+    } else {
+ 
+        openNewChatWin = true;
+
+    }
+
+    //打开快商通聊天窗口链接
+
+    function ksOpenLink() {
+
+        var appendTailUrl = '';
+
+        try {
+
+            var cas = getQueryString(ksChatLink, 'cas');
+
+            if (cas) {
+
+                var vi = '';
+
+                var dc = document.cookie.match(new RegExp('(^| )' + cas + '_KS_' + cas + '=([^;]*)(;|$)'));
+                console.log(document.cookie);
+
+                if (dc != null) {
+
+                    vi = (dc[2]);
+
+                }
+
+                if (vi) {
+
+                    appendTailUrl += '&vi=' + vi;
+
+                }
+
+            }
+
+        } catch (e) {}
+
+        var ref = "";
+
+        try { if (opener.document.referrer.length > 0) { ref = opener.document.referrer; } } catch (e) { ref = document.referrer; }
+
+        if (!ref || ref.length == 0) { ref = document.referrer; }
+
+        //对话网址
+
+        appendTailUrl += '&dp=' + encodeURIComponent(window.location.href);
+
+        //访客来源
+
+        if (ref) appendTailUrl += '&ref=' + encodeURIComponent(ref);
+
+        //对话标识
+
+        if (text) appendTailUrl += '&sText=' + encodeURIComponent(text);
+
+        if (ksChatLink.indexOf('?') == -1) { appendTailUrl = appendTailUrl.substring(1) + '?'; }
+
+        ksChatLink += appendTailUrl;  //把当前页地址、来源、标识作为参数追加到快商通原始链接里
+        console.log(ksChatLink);
+
+        //根据openNewChatWin设置打开聊天窗口
+
+        if (!openNewChatWin) {
+
+            window.location.href = ksChatLink;
+
+        } else {
+
+            var ksWin = window.open(ksChatLink, '_blank');
+
+            if (ksWin) {
+
+                try { ksWin.focus(); } catch (e) {} //将焦点定位到聊天窗口
+
+            }
+
+        }
+
+    }
+    //alert(typeof KS)
+
+   //如果快商通监控JS代码有加载完成,则使用快商通默认的打开聊天窗口事件,否则使用自定义的打开事件
+
+    if (typeof KS != 'undefined') {  //如果点击链接时还没加载到快商通监控js，则 typeof KS为object，否则为undefined
+
+        var p = {};
+
+        if (text) p['sText'] = text;
+
+        if (openNewChatWin) p['oTarget'] = '_blank';
+
+        try {
+
+            if (typeof KS.openChatWin == 'function') {
+                alert(1);
+
+                KS.openChatWin(p);  //快商通默认打开咨询页面的函数
+
+            } else if (typeof KS.openChatLink == 'function') {
+               //alert(2);return;
+               KS.openChatLink(p);
+
+            } else {
+                //alert(3);return;
+                ksOpenLink();
+
+            }
+
+        } catch (e) {
+            //alert(4);return;
+            ksOpenLink();
+
+        }
+
+    } else {
+        //alert(5);return;
+        ksOpenLink();  
+
+    }
+
+}
+</script>
+<!-- 如果加载该js，则 typeof KS为object，否则为undefined，一般改JS文件放在页面通用底部，而不是此处，放着只是为了测试-->
+<!-- <script type="text/javascript" src="https://gyak.kuaishang.cn/bs/ks.j?cI=523480&fI=9916&ism=1" charset="utf-8"></script> -->

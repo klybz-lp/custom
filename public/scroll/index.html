@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<title>自定义滚动条</title>
+	<link rel="stylesheet" href="css/index.css">
+	<!-- 引入bootstrap自定义字体 -->
+	<link rel="stylesheet" href="css/bs/css/bootstrap.css">
+	<script>
+		(function(){  
+			setRem() //打开页面及刷新页面的时候触发
+			//Orientation模块管理设备的方向信息，即判断横竖屏，只有手机端window才有该事件，如果是pc端则执行resize事件	
+			window.addEventListener("orientation" in window ? "deviceorientation" : "resize", setRem, false);  
+			function setRem(){
+				var colCount = 16;   //即把页面分成16份，如320px的iPhone4，1rem即20px，设计稿上的切出的图片或字体的大小换成rem的算法是设计稿尺寸/colCount，如果是640px的设计稿则1rem=640/16为40px，为了方便计算，最好整除为整10的倍数，如切出的图片是220px，则换算为220/40rem,可在浏览器的console进行运算(输入220/40按回车键即可)，也可通过less定义一个变量进行计算(推荐) ,建css同名less文件，index.css与index.less，把index.css里的代码放到index.less中，定义一个rem的变量@r:40rem;然后css中如果是120px，则改成120/@r来进行转换,然后用koala编译生成index.css文件,只需编译一次，后面再less文件编写的代码会自动解析到css文件中，在编辑器把less文件的格式改为css，这样方便在less文件里使用css的补全功能,推荐设计稿用750px，colCount为15,1rem为50px
+				var html =  document.documentElement; 
+				var hWidth = html.getBoundingClientRect().width;	
+				html.style.fontSize = hWidth/colCount + "px";
+			}
+		})();  
+	</script>
+</head>
+<body>
+	<header id="header">
+		<!-- 小图标建议适当增大外围的范围，图标本身大小不变，避免用户不好点击 -->
+		<a id="task" href="javascript:void(0)"><span class="glyphicon glyphicon-tasks"></span></a>
+		<h1><span class="glyphicon glyphicon-lock"></span>广州美莱集团</h1>
+		<a id="refresh" href="javascript:void(0)"><span class="glyphicon glyphicon-repeat"></span></a>
+	</header>
+
+	<nav id="nav">
+		<a class="active" href="javascript:void(0)">综合<span class="glyphicon glyphicon-chevron-down"></span></a>
+		<a href="javascript:void(0)">销量</a>
+		<a href="javascript:void(0)">价格
+			<span id="spanBox">
+				<span class="glyphicon glyphicon-chevron-up"></span>
+				<span class="glyphicon glyphicon-chevron-down active"></span>
+			</span>
+		</a>
+		<a href="javascript:void(0)">筛选<span class="glyphicon glyphicon-filter"></span></a>
+	</nav>
+
+	<section id="wrap">
+		<ul id="inner">
+			<!-- <li>
+				<a href="#">
+					<img src="iphone.jpg" alt="">
+					<span class="spanWrap">
+						<span class="sTitle">苹果(Apple)iphone8(A1586) 32G金色移动 联通电信4G手机</span>
+						<span class="sPrice">¥4888.00</span>
+						<span class="sComment">好评96% 59091</span>
+					</span>
+				</a>
+			</li> -->
+		</ul>
+	</section>
+	
+	<footer id="footer">
+		广州紫馨整形美容有限公司
+	</footer>
+	<script src="js/tool.js"></script>
+	<script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+06:54:59 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1520924099</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[图文]]></Content>
+<MsgId>6532319265329479651</MsgId>
+</xml>
+06:54:59 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1520924099</CreateTime>
+<MsgType><![CDATA[news]]></MsgType>
+<Content><![CDATA[]]></Content>
+<ArticleCount>1</ArticleCount>
+<Articles>
+    <item>
+        <Title><![CDATA[单图文标题]]></Title>
+        <Description><![CDATA[单图文内容]]></Description>
+        <PicUrl><![CDATA[http://discuz.comli.com/weixin/weather/icon/cartoon.jpg]]></PicUrl>
+        <Url><![CDATA[http://m.cnblogs.com/?u=txw1958]]></Url>
+    </item>
+</Articles>
+</xml>
+07:00:23 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1520924423</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[CLICK]]></Event>
+<EventKey><![CDATA[2]]></EventKey>
+</xml>
+07:00:23 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1520924423</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[点击菜单：2]]></Content>
+</xml>
+07:00:30 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1520924430</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[hello]]></Content>
+<MsgId>6532320686963654703</MsgId>
+</xml>
+07:00:30 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1520924430</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[2018-03-13 07:00:30]]></Content>
+</xml>
+07:12:04 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1520925124</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[CLICK]]></Event>
+<EventKey><![CDATA[1]]></EventKey>
+</xml>
+07:12:04 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1520925124</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[点击菜单：1]]></Content>
+</xml>
+07:12:14 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1520925134</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[嗯]]></Content>
+<MsgId>6532323710620631274</MsgId>
+</xml>
+07:12:14 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1520925134</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[2018-03-13 07:12:14]]></Content>
+</xml>
+07:12:19 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1520925139</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[多图文]]></Content>
+<MsgId>6532323732095467756</MsgId>
+</xml>
+07:12:19 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1520925139</CreateTime>
+<MsgType><![CDATA[news]]></MsgType>
+<Content><![CDATA[]]></Content>
+<ArticleCount>3</ArticleCount>
+<Articles>
+    <item>
+        <Title><![CDATA[多图文1标题]]></Title>
+        <Description><![CDATA[]]></Description>
+        <PicUrl><![CDATA[http://discuz.comli.com/weixin/weather/icon/cartoon.jpg]]></PicUrl>
+        <Url><![CDATA[http://m.cnblogs.com/?u=txw1958]]></Url>
+    </item>
+    <item>
+        <Title><![CDATA[多图文2标题]]></Title>
+        <Description><![CDATA[]]></Description>
+        <PicUrl><![CDATA[http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg]]></PicUrl>
+        <Url><![CDATA[http://m.cnblogs.com/?u=txw1958]]></Url>
+    </item>
+    <item>
+        <Title><![CDATA[多图文3标题]]></Title>
+        <Description><![CDATA[]]></Description>
+        <PicUrl><![CDATA[http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg]]></PicUrl>
+        <Url><![CDATA[http://m.cnblogs.com/?u=txw1958]]></Url>
+    </item>
+</Articles>
+</xml>
+02:13:04 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1521079984</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[unsubscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+02:13:04 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1521079984</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[取消关注]]></Content>
+</xml>
+02:13:21 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1521080001</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+02:13:21 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1521080001</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[欢迎关注李平工作室 ]]></Content>
+</xml>
+02:13:33 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1521080013</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[文本]]></Content>
+<MsgId>6532988910860505208</MsgId>
+</xml>
+02:13:33 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1521080013</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[这是个文本消息]]></Content>
+</xml>
+02:13:41 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1521080020</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[多图文]]></Content>
+<MsgId>6532988940925276283</MsgId>
+</xml>
+02:13:41 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1521080021</CreateTime>
+<MsgType><![CDATA[news]]></MsgType>
+<Content><![CDATA[]]></Content>
+<ArticleCount>3</ArticleCount>
+<Articles>
+    <item>
+        <Title><![CDATA[多图文1标题]]></Title>
+        <Description><![CDATA[]]></Description>
+        <PicUrl><![CDATA[http://discuz.comli.com/weixin/weather/icon/cartoon.jpg]]></PicUrl>
+        <Url><![CDATA[http://m.cnblogs.com/?u=txw1958]]></Url>
+    </item>
+    <item>
+        <Title><![CDATA[多图文2标题]]></Title>
+        <Description><![CDATA[]]></Description>
+        <PicUrl><![CDATA[http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg]]></PicUrl>
+        <Url><![CDATA[http://m.cnblogs.com/?u=txw1958]]></Url>
+    </item>
+    <item>
+        <Title><![CDATA[多图文3标题]]></Title>
+        <Description><![CDATA[]]></Description>
+        <PicUrl><![CDATA[http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg]]></PicUrl>
+        <Url><![CDATA[http://m.cnblogs.com/?u=txw1958]]></Url>
+    </item>
+</Articles>
+</xml>
+02:13:50 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1521080030</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[CLICK]]></Event>
+<EventKey><![CDATA[1]]></EventKey>
+</xml>
+02:13:50 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1521080030</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[点击菜单：1]]></Content>
+</xml>
+02:13:52 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1521080032</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[CLICK]]></Event>
+<EventKey><![CDATA[2]]></EventKey>
+</xml>
+02:13:52 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1521080032</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[点击菜单：2]]></Content>
+</xml>
+02:13:58 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1521080037</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[音乐]]></Content>
+<MsgId>6532989013939720327</MsgId>
+</xml>
+02:13:58 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1521080038</CreateTime>
+<MsgType><![CDATA[music]]></MsgType>
+<Music>
+    <Title><![CDATA[最炫民族风]]></Title>
+    <Description><![CDATA[歌手：凤凰传奇]]></Description>
+    <MusicUrl><![CDATA[http://121.199.4.61/music/zxmzf.mp3]]></MusicUrl>
+    <HQMusicUrl><![CDATA[http://121.199.4.61/music/zxmzf.mp3]]></HQMusicUrl>
+</Music>
+</xml>
+02:14:02 R <xml><ToUserName><![CDATA[gh_af36b34face6]]></ToUserName>
+<FromUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></FromUserName>
+<CreateTime>1521080042</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[视频]]></Content>
+<MsgId>6532989035414556810</MsgId>
+</xml>
+02:14:02 T <xml>
+<ToUserName><![CDATA[oLnDs0h1tf9D7mLM5x-v0fvsBJs0]]></ToUserName>
+<FromUserName><![CDATA[gh_af36b34face6]]></FromUserName>
+<CreateTime>1521080042</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[2018-03-15 02:14:02]]></Content>
+</xml>

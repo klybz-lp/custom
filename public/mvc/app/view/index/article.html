@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>网站管理系统</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<!-- head -->
+	<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0;">
+		<div class="container">
+			<div class="navbar-header">
+			    <a href="javascript:void(0)" class="navbar-brand logo">
+			        <img src="images/logo.png" alt="网站管理系统">
+			    </a>
+		        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+					<span class="icon-bar"></span>  <!--icon-bar表示一条横线-->
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>   
+			</div>
+		    <div class="btn-group navbar-right btngroup" role="group">
+			  <button id="user_login" type="button" class="btn btn-default">登录</button>
+			  <button id="user_reg" type="button" class="btn btn-default" onclick="javascript:window.location.href='reg.html'">注册</button>
+			</div>
+			
+			<!-- 响应式导航，当屏幕尺寸小于775px时，ul隐藏变成一个折叠菜单，通过点击button显示 -->
+			<div class="collapse navbar-collapse" id="navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span> 首页</a></li>
+					<li><a href="list.html" data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-list"></span> 资讯</a>
+						<ul class="dropdown-menu" style="min-width: 152px;margin-top:0px">
+					        <li><a href="list.html">八卦娱乐</a></li>
+					        <li><a href="javascript:void(0)">军事动态</a></li>
+					        <li><a href="javascript:void(0)">时尚女人</a></li>
+					        <li><a href="javascript:void(0)">科技频道</a></li>
+					        <li><a href="javascript:void(0)">智能手机</a></li>
+					        <li><a href="javascript:void(0)">美容护肤</a></li>
+					        <li><a href="javascript:void(0)">热门汽车</a></li>
+					        <li><a href="javascript:void(0)">房产家居</a></li>
+					        <li><a href="javascript:void(0)">读书教育</a></li>
+					        <li><a href="javascript:void(0)">股票基金</a></li>
+					     </ul>
+					</li>
+					<li><a href="case.html"><span class="glyphicon glyphicon-fire"></span> 案例</a></li>
+					<li><a href="about.html"><span class="glyphicon glyphicon-question-sign"></span> 关于</a></li>
+				</ul>
+            </div>
+			 <!-- <p class="navbar-text">登录</p>   -->  <!--导航栏中使用文本-->
+		</div>
+	</nav>
+
+
+	<div class="jumbotron">
+		<div class="container">
+			<hgroup>
+				<h1>资讯</h1>
+				<h4>企业内训的最新动态、资源等...</h4>
+			</hgroup>
+		</div>
+	</div>
+
+	<!-- 面包屑 -->
+	<div class="mbx">
+		<blockquote>
+			<ol class="breadcrumb">
+			  <li><a href="/"><span class="glyphicon glyphicon-home"></span>首页</a></li>
+			  <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-th-list">资讯</a></li>
+			  <li class="active"><span class="glyphicon glyphicon-th"></span>军事动态</li>
+			</ol>
+		</blockquote>
+	</div>
+
+	<div id="information">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="container-fluid" style="padding:0;">
+						<div class="row content">
+							<div class="content-tt">
+								<h2>广电总局发布TVOS2.0 华为阿里参与研发</h2>
+								<p>
+									<span class="text-muted">时间：2017-05-11 22:08:52</span> 
+									<span class="text-muted">来源：南方都时报</span> 
+									<span class="text-muted">作者：admin</span> 
+									<span class="text-muted">点击量：203 次</span>
+								</p>
+							</div>
+							<div class="content-summary well">
+								<p><span class="text-danger">文章摘要：</span>TVOS2.0是在TVOS1.0与华为MediaOS及阿里巴巴YunOS融合的基础上，打造的新一代智能电视操作系统。华为主要承担开发工作，内置的电视购物商城由阿里方面负责。</p>
+							</div>
+							<div class="content-main">
+								<p style="text-align:center;"><img src="http://n.sinaimg.cn/tech/transform/20170518/KWv9-fyfeutq2230422.jpg" alt=""></p>
+								<P>　　随着快递业巨头的加入，中国外卖业“战局”有了新的想象空间。</P>
+								<P>　　近日，关于百度外卖与顺丰可能“合作”的传闻频出。有一种说法是，百度和顺丰将按照5：5的出资比例，共同设立合资公司，来运营O2O业务。还有消息称，顺丰或将投资百度外卖，并接管百度外卖的物流业务，甚至有可能全盘接手百度外卖。</P>
+								<P>　　一名知情人士向澎湃新闻透露，百度外卖、顺丰将以何种形式“合作”还在讨论，未来百度对百度外卖的控股仍将保持。该知情人士称，百度不会放弃百度外卖，反而可能强化O2O的存在。</P>
+								<P>　　在中国物流学会特约研究员杨达卿看来，顺丰如果全资收购百度外卖，那对顺丰和百度都是下策。杨达卿向澎湃新闻分析，对百度来说，百度外卖是大百度生态的一条护城河，虽然不够宽，但给百度地图、百度金融提供生态支撑，丢了百度外卖这条生态护城河，百度糯米压力更大，对手兵临城下，百度金融、百度地图，大百度的生态压力也更大。</P>
+								<P>　　杨达卿认为，对顺丰来说，外卖即时物流是顺丰进入同城物流微循环，尤其是即时物流的有益补充，但并非关键腿脚，拥有不如借力，收购不如合资，以合资入口借力大百度的生态棋局，嫁接百度地图、百度糯米、百度搜索，是做一盘更大棋局的开局。</P>
+								<P>　　对于百度外卖与顺丰的各种“合作”猜想，顺丰相关人士5月17日回应澎湃新闻称，公司对此并不知情。</P>
+								<P>　　此前的5月10日，顺丰在瑞信深港通投资峰会上回应称，目前市场上有一些相关报道，有这些声音是可以理解的，公司和百度外卖在某些城市有合作，但暂时没有需要公开的信息。</P>
+								<P>　　据了解，2016年6、7月份开始，百度外卖与顺丰展开合作。在午间高峰送餐时段，顺丰负责部分百度外卖订单的配送工作。截至目前，在北京国贸等地，还可以看到身着顺丰工作服的快递员送百度外卖的餐食。</P>
+								<P>　　快递投资者、快递专家赵小敏向澎湃新闻表示，截至目前，顺丰、百度外卖最终的合作方案仍未敲定，“不过，双方之间的合作会继续，而且会进行深度合作。”</P>
+								<P>　　赵小敏向澎湃新闻透露，顺丰、百度外卖的最终合作方案下周将会初步敲定，5月底肯定会尘埃落定，“对顺丰来讲，O2O是一个关键性的领域。百度在人工智能、无人驾驶方面的研发能力，在传统搜索引擎方面的绝对统治地位，以及在金融科技方面上的布局，还有即将全面开始的实名制认证，会给顺丰带来大量流量，以及精准定位、服务流程优化和科技能力的提升。”</P>
+								<P>　　杨达卿表示，合资是百度和顺丰的双优选项，合资之后，大百度在商业O2O有了品牌的“战友”，可以维护生态棋局不萎缩。对顺丰来说，在阿里和腾讯生态之外，或能逐渐获取更多战略资源的生态支持，包括百度搜索、百度地图、百度汽车等。这些组合资源，也只有大百度更有可能打包对接。</P>
+								<P>　　据顺丰控股(002352)此前公布的2016年年报，同城配送业务方面，自2016年5月起，顺丰快速组建专职配送团队。截至报告期末，顺丰在全国已组建完成近4000人的专职配送团队，服务的品牌和客户包括肯德基、麦当劳、百度、华润万家、家乐福等。</P>
+								<P>　　过去一年，百度外卖深陷卖身美团、高管出走、业务收缩的传闻中。比达咨询(BDR)数据中心监测数据显示，2017年第一季度外卖市场格局中，饿了么市场份额为36.5%，美团外卖市场份额为33%，百度外卖市场份额为17.3%。</P>
+							</div>
+							<ul class="pager">
+					            <li class="previous"><a href="javascript:void(0)" id="htPre">&larr; 上一篇</a></li>
+					            <li class="next"><a href="avascript:void(0)" id="htNext">下一篇 &rarr;</a></li>
+					        </ul>
+					        <div class="tags">
+					        	<span class="pull-left text-primary">TAG标签：</span>
+					        	<ul class="list-inline pull-left">
+					        		<li><a href="javascript:void(0)"><code>中国</code></a></li>
+					        		<li><a href="javascript:void(0)"><code>萨德</code></a></li>
+					        		<li><a href="javascript:void(0)"><code>美国</code></a></li>
+					        		<li><a href="javascript:void(0)"><code>韩国总统</code></a></li>
+					        		<li><a href="javascript:void(0)"><code>习近平</code></a></li>
+					        	</ul>
+					        </div>
+							<div class="clearfix"></div>
+					        <!-- comment -->
+							<div class="comments">
+								<div class="panel panel-default">
+								  <div class="panel-heading"><span class="glyphicon glyphicon-comment"></span>最新评论<span class="pl">已有<strong class="text-danger">10</strong>人参与评论</span></div>
+								  <div class="panel-body">
+								    <ul class="media-list">
+										<li class="meida">
+											<div class="media-left">
+												<img src="images/01.gif" alt="" class="media-object" style="width:40px;">
+											</div>
+											<div class="media-body">
+												<h4 class="meida-heading">评论标题</h4>
+												<p>这文章不错0哦！！！</p>
+												<div class="meida">
+													<div class="media-left">
+														<img src="images/03.gif" alt="" class="media-object" style="width:40px;">
+													</div>
+													<div class="media-body">
+														<h4 class="meida-heading">评论标题</h4>
+														<p>这文章不错0哦！！！</p>
+														<div class="meida">
+															<div class="media-left">
+																<img src="images/05.gif" alt="" class="media-object" style="width:40px;">
+															</div>
+															<div class="media-body">
+																<h4 class="meida-heading">评论标题</h4>
+																<p>这文章不错0哦！！！</p>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="meida">
+													<div class="media-left">
+														<img src="images/04.gif" alt="" class="media-object" style="width:40px;">
+													</div>
+													<div class="media-body">
+														<h4 class="meida-heading">评论标题</h4>
+														<p>这文章不错0哦！！！</p>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="meida">
+											<div class="media-left">
+												<img src="images/06.gif" alt="" class="media-object" style="width:40px;">
+											</div>
+											<div class="media-body">
+												<h4 class="meida-heading">评论标题</h4>
+												<p>这文章不错0哦！！！</p>
+											</div>
+										</li>
+									</ul>
+								  </div>
+
+								</div>
+								<form action="" method="post" class="form-inline">
+									<div class="taid">
+										<p class="pull-left">您对本文的态度：</p>
+										<label class="radio-inline">
+										  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 支持
+										</label>
+										<label class="radio-inline">
+										  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 中立
+										</label>
+										<label class="radio-inline">
+										  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 反对
+										</label>
+										<div class="clearfix"></div>
+									</div>
+									<p class="text-danger">请遵守互联网规则，不要发表关于政治、反动、色情之类的评论。</p>
+									<textarea class="form-control" rows="3" style="width:100%;" placeholder="请输入评论内容......"></textarea>
+									<div class="codes">
+										<div class="form-group pull-left">
+										    <label for="exampleInputEmail1" class="">验证码：</label>
+										    <input type="text" class="form-control" id="code" placeholder="请输入验证码">
+										    <img src="images/vdimgck.png" alt="" style="height:35px;padding-right:10px;">
+										</div>
+										 <button type="submit" class="btn btn-default">提交</button>
+									</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="col-md-4 info-right hidden-xs hidden-sm">
+				    <!-- 折叠菜单 -->
+	                <div class="panel-group rsidle" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<span class="glyphicon glyphicon-list"></span>
+									<a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">八卦娱乐</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in"> ,<!--in表示显示-->
+								<div class="panel-body">
+									<ul class="list-group">
+										<li class="list-group-item">内地娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">港台娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">日韩娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">欧美娱乐<span class="badge">10</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<span class="glyphicon glyphicon-list"></span>
+									<a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion">军事动态</a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="list-group">
+										<li class="list-group-item">中国军事<span class="badge">10</span></li>
+										<li class="list-group-item">港台军事<span class="badge">10</span></li>
+										<li class="list-group-item">日韩军事<span class="badge">10</span></li>
+										<li class="list-group-item">欧美军事<span class="badge">10</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<span class="glyphicon glyphicon-list"></span>
+									<a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">时尚女人</a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="list-group">
+										<li class="list-group-item">内地娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">港台娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">日韩娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">欧美娱乐<span class="badge">10</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<span class="glyphicon glyphicon-list"></span>
+									<a href="#collapseFour" data-toggle="collapse" data-parent="#accordion">科技频道</a>
+								</h4>
+							</div>
+							<div id="collapseFour" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="list-group">
+										<li class="list-group-item">内地娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">港台娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">日韩娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">欧美娱乐<span class="badge">10</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<span class="glyphicon glyphicon-list"></span>
+									<a href="#collapseFive" data-toggle="collapse" data-parent="#accordion">读书教育</a>
+								</h4>
+							</div>
+							<div id="collapseFive" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="list-group">
+										<li class="list-group-item">内地娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">港台娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">日韩娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">欧美娱乐<span class="badge">10</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<span class="glyphicon glyphicon-list"></span>
+									<a href="#collapseSix" data-toggle="collapse" data-parent="#accordion">股票基金</a>
+								</h4>
+							</div>
+							<div id="collapseSix" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="list-group">
+										<li class="list-group-item">内地娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">港台娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">日韩娱乐<span class="badge">10</span></li>
+										<li class="list-group-item">欧美娱乐<span class="badge">10</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				    <!-- 文章推荐 -->
+				    <div class="slide">
+						<blockquote>
+							<h2>本月热点</h2>
+						</blockquote>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info2.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>苹果四寸手机为何要配置强大的A9处理器？</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info1.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>广电总局发布TVOS2.0 华为阿里参与研发</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info3.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>六家互联网公司发声明 抵制流量劫持等违法行为</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info3.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>六家互联网公司发声明 抵制流量劫持等违法行为</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info2.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>苹果四寸手机为何要配置强大的A9处理器？</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				    <div class="slide">
+						<blockquote>
+							<h2>热门资讯</h2>
+						</blockquote>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info2.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>苹果四寸手机为何要配置强大的A9处理器？</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info1.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>广电总局发布TVOS2.0 华为阿里参与研发</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info3.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>六家互联网公司发声明 抵制流量劫持等违法行为</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info3.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>六家互联网公司发声明 抵制流量劫持等违法行为</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="slide">
+						<blockquote>
+							<h2>最新资讯</h2>
+						</blockquote>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info2.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>苹果四寸手机为何要配置强大的A9处理器？</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info1.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>广电总局发布TVOS2.0 华为阿里参与研发</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info3.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>六家互联网公司发声明 抵制流量劫持等违法行为</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-5 col-sm-5 col-xs-5" style="margin: 12px 0; padding: 0">
+									<img src="images/info3.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7" style="padding-right: 0">
+									<h4>六家互联网公司发声明 抵制流量劫持等违法行为</h4>
+									<p>admin 15 / 10 / 11</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer -->
+	<footer id="footer">
+		<div class="container">
+		    <div class="social">
+                          <ul class="list-inline">
+                            <li><a href="#" class=""><i class="fa fa-dribbble" style="font-size:20px;color:#333;"></i></a></li>
+                            <li><a href="#" class=""><i class="fa fa-twitter" style="font-size:20px;color:#333;"></i></a></li>
+                            <li><a href="#" class=""><i class="fa fa-envelope" style="font-size:20px;color:#333;"></i></a></li>
+                          </ul>
+                        </div>
+			<p>企业培训 | 合作事宜 | 版权投诉</p>
+			<p>粤ICP 备12345678. © 2017-2026 cms管理系统. Powered by liping.</p>
+		</div>
+	</footer>
+	<div class="modal fade" id="myModal" tabindex="-1">
+	<!-- 窗口声明-->
+		<div class="modal-dialog modal-sm">
+		<!-- 内容声明-->
+			<div class="modal-content">
+				<!-- 头部-->
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">会员登录</h4>
+				</div>
+				<!-- 主体-->
+				<div class="modal-body">
+					<form action="?action=login" name="login" method="post" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">账号：</label>
+							<div class="col-sm-9">
+								<input type="text" name="user_name" class="form-control" placeholder="请输入您的账号">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">密码：</label>
+							<div class="col-sm-9">
+								<input type="password" name="user_pass" class="form-control" placeholder="请输入您的密码">
+							</div>
+						</div>
+						<div class="checkbox pull-right">
+							<label>
+								<input type="checkbox">记住我
+							</label>
+						</div>
+						<div class="clearfix"></div>
+						<button class="btn btn-primary center-block" style="padding: 6px 40px;margin-top:10px;">登 录</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+
+		$(function(){
+
+
+			//login
+			$("#user_login").click(function(){
+				$('#myModal').modal('show');
+			})
+
+			//弹窗垂直居中丰富
+			function centerModals(){
+			    $('.modal').each(function(i){
+			        var $clone = $(this).clone().css('display', 'block').appendTo('body');    var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2);
+			        top = top > 0 ? top : 0;
+			        $clone.remove();
+			        $(this).find('.modal-content').css("margin-top", top);
+			    });
+			}
+
+			$('.modal').on('show.bs.modal', centerModals);  //显示弹窗调用方法
+			$(window).on('resize', centerModals);  //调整页面尺寸也能居中
+
+		})
+
+	</script>
+</body>
+</html>

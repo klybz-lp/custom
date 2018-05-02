@@ -1,0 +1,27 @@
+﻿{extend name="public/base" /}
+{block name="seo"}
+<title>{$title|default="邀约系统数据管理后台"}</title>
+<meta name="keywords" content="{keywords|default='数据管理后台'}">
+<meta name="description" content="{description|default='数据管理后台'}">
+{/block}
+
+{block name="content"}
+<section class="Hui-article-box">
+	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+		<div class="Hui-tabNav-wp">
+			<ul id="min_title_list" class="acrossTab cl">
+				<li class="active">
+					<span title="主页" data-href="/index/index/welcome">主页</span>
+					<em></em></li>
+			</ul>
+		</div>
+		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+	</div>
+	<div id="iframe_box" class="Hui-article">
+		<div class="show_iframe">
+			<div style="display:none" class="loading"></div>
+			<iframe id="mainframe" scrolling="yes" frameborder="0" src="{:url('index/welcome')}{//:url('admin/adminList')}"></iframe>
+		</div>
+	</div>
+</section>
+{/block}

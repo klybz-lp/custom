@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+#box {
+	width: 300px;
+	height: 300px;
+	background: red;
+	color: #fff;
+	font-size: 20px;
+	word-break: break-all;
+}	
+</style>
+</head>
+<body>
+<div id="box">
+	<p></p>
+	<p></p>
+</div>
+<script type="text/javascript">
+//安卓手机大面积触屏会触发touchmove的问题是指当手指按下时如果触摸的面积较大会同时触发touchmove事件，而且两个事件获取的起始坐标是一致的，需要在手机上才能测试出bug
+document.addEventListener('touchstart', function(e) {
+	e.preventDefault();  //阻止浏览器的默认行为
+});
+(function(){
+	var box = document.querySelector('#box');
+	var child = box.children;
+	var lastPoint = {};  //保存上一次手指触摸的坐标，如果跟这次的坐标一致则表示并没有发生touchmove事件，解决安卓手机大面积触屏会触发touchmove的问题
+	box.addEventListener('touchstart', function(e) {
+		var touch = e.changedTouches[0];
+		lastPoint = {
+			x: Math.round(touch.pageX),
+			y: Math.round(touch.pageY)
+		}
+		child[0].innerHTML = "x:"+lastPoint.x+"<br/>y:"+lastPoint.y;
+	});
+	box.addEventListener('touchmove', function(e) {
+		var touch = e.changedTouches[0];
+		var nowPoint = {  //用来判断开始移动时的坐标
+			x: Math.round(touch.pageX),
+			y: Math.round(touch.pageY)
+		}
+		if(lastPoint.x == nowPoint.x && lastPoint.y == nowPoint.y){  //判断开始移动时的坐标跟手指按下时的坐标是否一致，一致则表明是安卓手机大面积触屏会触发touchmove的问题
+			return;
+		}
+		child[1].innerHTML = "x:"+nowPoint.x+"<br/>y:"+nowPoint.y;
+		
+		lastPoint.x = nowPoint.x;  //滑动后同步坐标
+		lastPoint.y = nowPoint.y;
+		
+	});
+})();	
+</script>
+</body>
+</html>

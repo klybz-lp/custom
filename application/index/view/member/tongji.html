@@ -1,0 +1,115 @@
+﻿{extend name="public/base" /}
+{block name="seo"}
+<title>{$title|default="邀约系统数据管理后台"}</title>
+<meta name="keywords" content="{keywords|default='数据管理后台'}">
+<meta name="description" content="{description|default='数据管理后台'}">
+{/block}
+<!--block标签里不写内容则表示去掉基础模板里部分内容-->
+{block name='header'}{/block}
+{block name='aside'}{/block}
+{block name="content"}
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 客户管理 <span class="c-gray en">&gt;</span> 数据统计 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div id="page-intro" style="font-size: 20px;font-weight: bold;margin-top: 0;">数据统计</div>
+	<div style="clear:both"></div>
+	<div class="content-box" style="margin-top:20px;">
+		<!-- Start Content Box -->
+		<div class="content-box-header">
+			<h3 style="cursor: s-resize;margin-top:0px;  font-size: 17px;  font-weight: bold;">数据列表</h3>
+
+			<ul class="content-box-tabs">
+				<li><a href="#tab1" class="default-tab current">数据</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="content-box-content">
+
+
+			<div class="tab-content default-tab" id="tab1" style="display: block;">
+
+				<table class="table table-border table-bordered table-hover table-bg table-sort" style="border-collapse: collapse;">
+					<thead>
+					<tr class="text-c">
+						<td width="50%" style="border: none;font-size: 16px;"><b>顾客级别</b></td>
+						<td width="50%" style="border: none;font-size: 16px;"><b>人数</b></td>
+					</tr>
+					</thead>
+					<tbody>
+					{volist name='typeres' id='vo'}
+					<tr class="text-c">
+						<td>{$vo.type}</td>
+						<td>{$vo.total}</td>
+					</tr>
+					{/volist}
+					</tbody>
+				</table>
+
+				<table class="table table-border table-bordered table-hover table-bg table-sort" style="border-collapse: collapse;">
+					<thead>
+					<tr class="text-c">
+						<td width="50%" style="border: none;font-size: 16px;"><b>现场客服</b></td>
+						<td width="50%" style="border: none;font-size: 16px;"><b>人数</b></td>
+					</tr>
+					</thead>
+					<tbody>
+					{volist name='kefures' id='vo'}
+					<tr class="text-c">
+						<td>{if $vo.kefu}{$vo.kefu}{else/}未分配{/if}</td>
+						<td>{$vo.total}</td>
+					</tr>
+					{/volist}
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+<!---邀请函上的二维码图片-->
+
+{/block}
+
+{block name='js'}
+<!--<script type="text/javascript" src="__STATIC__/lib/laypage/1.2/laypage.js"></script>--> <!--通过数据库查询出所有数据分配到模板，然后js自动进行分页处理，适合数据不是特别多的页面-->
+<script type="text/javascript">
+	function setSite(number){
+
+		layer.confirm("确定需要操作座位："+number+"吗？",function(index){
+			$.ajax({
+				url: '?action=setsite',
+
+				type: 'GET',
+
+				data:{number:number},
+
+				dataType: 'html',
+
+				timeout: 2000,
+
+				error: function(){alert('服务器繁忙');},
+
+				success: function(result){
+
+					if(result=="ok"){
+						layer.msg('安排座位成功!',{icon:1,time:1000});
+						$("#site_"+number).removeClass("cansit");
+						//$("#site_"+number).removeAttr("onclick");
+						$("#site_"+number).css("color","red");
+					}
+					else if(result=="exsits"){
+						layer.msg('取消座位成功!',{icon:1,time:1000});
+						$("#site_"+number).addClass("cansit");
+						//$("#site_"+number).removeAttr("onclick");
+						$("#site_"+number).css("color","#555");
+					}
+					else{
+						layer.msg('提交失败!',{icon:2,time:1000});
+					}
+				}
+			});
+		});
+	}
+
+</script>
+{/block}

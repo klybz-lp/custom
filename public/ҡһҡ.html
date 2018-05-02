@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+  <title>摇一摇</title>
+</head>
+<body>
+  <style>
+    body,div,span {margin: 0;}
+    #wrap {width: 200px;height:200px;margin: 50px auto;background: #f00;}
+</style>
+
+<div id="wrap"></div>
+<script>
+var wrap = document.querySelector("#wrap");
+//devicemotion检测手机晃动，只能给window绑定
+if (window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', function(e){
+      var motion = e.accelerationIncludingGravity;
+      x = motion.x;  //x方向的晃动距离
+      y = motion.y;
+      z = motion.z;
+      wrap.innerHTML = "x:"+x+";<br />y:"+y+";<br />z:"+z;
+    }, false);
+} else {
+    console.log('not support mobile event');
+}
+</script>    
+</body>
+</html>

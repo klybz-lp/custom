@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="css/swiper-3.3.1.min.css"/>
+	<style type="text/css">
+		html, body{height: 100%;font-family: "Helvetica";}
+		html {font-size:62.5%;}
+		body{background: #F5F5F5;overflow-x:hidden;}
+		*{margin: 0;padding: 0;box-sizing: border-box;}
+		a {color: #428bca;text-decoration: none;}
+		a,input,button {-webkit-appearance: none;border-radius: 0;outline: none;}
+		a:hover,a:focus {color: #2a6496;text-decoration: underline;}
+		
+		.padd_40{padding-top: 4rem;background: #F5F5F5;}
+		.tit{font-size:1.8rem;text-align:center;height: 4rem;line-height:4rem;position: fixed;top: 0;left: 0;width: 100%;z-index: 10; background: #f50;color: #fff;}
+		.init-loading {height: 5rem;line-height: 5rem;font-size: 1.6rem;background-color: transparent;border:none;text-align: center;}
+		.refreshtip {font-size:1.6rem;position: absolute;left: 0;width: 100%;margin: 10px 0;text-align: center;color: #999;}
+		.swiper-container{overflow: visible;}
+		.loadtip {font-size:1.6rem; display: block;width: 100%;height: 4rem;line-height:4rem;text-align: center;color: #999;border-top: 1px solid #ddd;}
+		.swiper-container, .w{height: calc(100vh - 8rem);} /*8rem = loadtip的高度+init-loading的高度*/
+		.swiper-slide{height: auto;}
+		
+		.list-group-item{font-size:1.6rem;position: relative; display: block;height: 4rem;line-height:4rem;padding:0 0 0 1rem;margin-bottom: -1px;background-color: #fff;border: 1px solid #ddd;}
+	</style>
+</head>
+<body>
+	<div class="padd_40">
+		<div class="tit">广州紫馨医院</div>
+		<div class="swiper-container">
+			<!--<div class="refreshtip">下拉可以刷新</div>-->
+			<div class="swiper-wrapper w">
+				<div class="swiper-slide d">
+					<div class="init-loading" style="display: none;">下拉刷新</div>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide list-group">
+							<div class="list-group-item">列表</div>
+							<div class="list-group-item">列表</div>
+							<div class="list-group-item">列表</div>
+							<div class="list-group-item">列表</div>
+							<div class="list-group-item">列表</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="loadtip">上拉加载更多</div>
+			<div class="swiper-scrollbar"></div>
+		</div>
+	</div>
+<script src="js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/swiper.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var loadFlag = true;
+	var oi = 0;
+	var initLoadingH = $(".init-loading").height();
+	var mySwiper = new Swiper('.swiper-container',{
+		direction: 'vertical',
+		scrollbar: '.swiper-scrollbar',
+		slidesPerView: 'auto',
+		
+		mousewheelControl: true,
+		freeMode: true,
+		onTouchStart: function(swiper){	
+			if(mySwiper.translate < 50 && mySwiper.translate > 0){
+				//mySwiper.resistanceRatio=0.7;
+			}
+		},
+		onTouchMove: function(swiper){		//手动滑动中触发
+			var _viewHeight = document.getElementsByClassName('swiper-wrapper')[0].offsetHeight;
+            var _contentHeight = document.getElementsByClassName('swiper-slide')[0].offsetHeight;
+            
+            
+            if(mySwiper.translate < 50 && mySwiper.translate > 0) {
+				$(".init-loading").html('下拉刷新...').show();
+			}else if(mySwiper.translate > 50 ){
+				$(".init-loading").html('释放刷新...').show();
+			}
+
+		},
+		onTouchEnd: function(swiper) {
+			// HTMLElement.offsetHeight 返回该元素的像素高度，高度包含该元素的垂直内边距和边框，且是一个整数。
+			var _viewHeight = document.getElementsByClassName('swiper-wrapper')[0].offsetHeight;
+            var _contentHeight = document.getElementsByClassName('swiper-slide')[0].offsetHeight;
+			console.log(_viewHeight,_contentHeight);
+             // 上拉加载
+            if(mySwiper.translate <= _viewHeight - _contentHeight - 50 && mySwiper.translate < 0) {
+                // console.log("已经到达底部！");
+               
+                if(loadFlag){
+                	$(".loadtip").html('正在加载...');
+                }else{
+                	$(".loadtip").html('没有更多啦！');
+                }
+				
+				/*if(mySwiper.translate >= 0){
+					mySwiper.resistanceRatio = 0; //让slide在边缘不能被拖动
+				}*/
+
+                //if (oi < 5*5) {
+	                setTimeout(function() {
+	                    /*for(var i = 0; i <5; i++) {
+	                    	oi++;
+	                        $(".list-group").append('<li class="list-group-item">我是加载出来的'+oi+'...</li>');
+	                    }
+	                    $(".loadtip").html('加载成功...');
+	                    mySwiper.update(); // 重新计算高度;
+	                    setTimeout(function() {
+	                    	$(".loadtip").html('上拉加载更多');
+	                	}, 400);*/
+	                	$.ajax({
+			                url: 'info.php',
+			                type: 'POST', //GET
+			                async: false, //或false,是否异步
+			                dataType: "json",
+			                data: {
+			                    item: "refesh",count: oi
+			                },
+			                timeout: 5000, //超时时间
+
+			                beforeSend: function(){
+			                	//console.log(oi)
+			                },
+
+			                success: function(data) {
+			                
+			                    if (data == 0) {
+
+			                    	loadFlag = false;
+			                    	$(".loadtip").html('没有更多啦！');
+			                    	mySwiper.off("TouchEnd");
+
+
+			                    } else if (data) {
+
+			                    	for(var i = 0; i < data.length; i++){
+				                		//console.log(data[i].new_message)
+				                		$(".list-group").eq(0).append('<li class="list-group-item">'+data[i].id+':'+data[i].new_message+'</li>');
+				                	}
+				                	oi++;
+				                	mySwiper.update(); // 重新计算高度;\
+				                	$(".loadtip").html("加载成功");
+				                	setTimeout(function(){
+				                		$(".loadtip").html("上拉加载更多");
+				                	},500)
+
+			                    } else {
+			                        alert("网络延时！")
+			                    }
+
+			                },
+			                error: function(xhr, textStatus) {
+			                    alert('网络延时')
+			                }
+			            })
+	                }, 800);
+                //} 
+                /*if(oi < 5) {
+                	loadFlag = false;
+                }*/
+            }
+            
+            // 下拉刷新
+            if(mySwiper.translate >= 50) {
+                $(".init-loading").html('正在刷新...').show();
+                $(".loadtip").html('上拉加载更多');
+                loadFlag = true;
+                
+                setTimeout(function() {
+                    $(".refreshtip").show(0);
+                    $(".init-loading").html('刷新成功！');
+                    setTimeout(function(){
+                    	$(".init-loading").html('').animate({height: 0}, 200,function(){
+                    		$(".init-loading").hide().height(initLoadingH);
+                    	});
+                    },800);
+                    $(".loadtip").show(0);
+                    
+                    //刷新操作
+                    mySwiper.update(); // 重新计算高度;
+                }, 1000);
+            }else if(mySwiper.translate >= 0 && mySwiper.translate < 50){
+            	$(".init-loading").html('').hide();
+            }
+            return false;
+		}
+	});
+
+
+</script>
+</body>
+</html>

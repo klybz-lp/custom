@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<title>图片下拉加载</title>
+	<link rel="stylesheet" href="css/index.css">
+	<script>
+		(function(){  
+			setRem() //打开页面及刷新页面的时候触发
+			//Orientation模块管理设备的方向信息，即判断横竖屏，只有手机端window才有该事件，如果是pc端则执行resize事件	
+			window.addEventListener("orientation" in window ? "deviceorientation" : "resize", setRem, false);  
+			function setRem(){
+				var colCount = 16;   //如果是640px的设计稿则1rem=640/16为40px
+				var html =  document.documentElement; 
+				var hWidth = html.getBoundingClientRect().width;	
+				html.style.fontSize = hWidth/colCount + "px";
+			}
+		})();  
+	</script>
+</head>
+<body>
+	<header id="header">
+		<h1>广州美莱集团</h1>
+	</header>
+
+	<div id="box">
+		<div id="inner">
+			<ul id="list">
+			</ul>
+			<footer>加载更多</footer>
+		</div>
+	</div>
+	<section id="imgPage">
+		<header id="header">
+			<h1>大图预览<a href="javascript:void(0)" id="backBtn"><</a></h1>
+		</header>
+		<div class="imgWrap">
+			<img src="images/iphone1.jpg" alt="" id="bigImg">
+			<nav id="imgNavs">
+				<a href="javascript:void(0)">向左旋转90</a>
+				<a href="javascript:void(0)">向右旋转90</a>
+				<a href="javascript:void(0)">放大</a>
+				<a href="javascript:void(0)">缩小</a>
+			</nav>
+		</div>
+	</section>
+	<script src="js/tool.js"></script>
+	<script>
+	//谷歌浏览器模拟调低网速，F12-右侧的三个小点-MORE TOOLS-Network conditions-选择,正常网速是online，slow 3g，方便在本地查看图片预加载的效果
+	document.addEventListener('touchstart', function(e) {
+		e.preventDefault();
+	});
+
+	(function(){
+		//模拟ajax加载加载图片
+		var box = document.querySelector("#box");
+		var inner = document.querySelector("#inner");
+		var list = document.querySelector("#list");
+		var footer = inner.querySelector("footer");
+		var lis = list.children;
+		var dataImg = []; //图片数组
+		var length = 10; //每次加载10张图片
+		var start = 0; //当前请求的第一张图片的编号即分页的offset
+		var isEnd = false; //判断是否滑动到了最底部
+		for (var i = 0; i < 60; i++) {
+		 	dataImg.push("images/iphone"+(i+1)+".jpg");
+		}
+		//console.log(dataImg); 
+		setBigImg();
+		setScroll();
+		createLi();
+		//生成li
+		function createLi(){
+			var end = start + length;
+			for (var i = start; i < end; i++) {
+				var li = document.createElement("li");
+				//因为li元素是支持src、isLoad这些自定义属性的，所以不会显示标签上
+				li.src = dataImg[i];
+				li.isLoad = true; //判断是否已经加载了图片，避免进入可视区域滚动时会一直加载图片
+				list.append(li);
+			}
+			createImg();
+		}
+		//预加载图片，当图片处于可视区域则加载
+		function createImg(){
+			for (var i = 0; i < lis.length; i++) {
+				var boxRect = box.getBoundingClientRect();
+				var bottom = boxRect.top + boxRect.height;
+				//getBoundingClientRect用于获取某个元素相对于视窗的位置集合,会得到元素的top、right、bottom、left、width、height属性，这些属性以一个对象的方式返回。
+				var top = lis[i].getBoundingClientRect().top; //li相对于可视区域的top值
+				if (top < bottom && lis[i].isLoad) { //当前li进入了可视区域
+					lis[i].isLoad = false;
+					showImg(lis[i])
+				}
+			}
+		}
+
+		//加载图片
+		function showImg(li){
+			var img = new Image();
+			img.src = li.src;
+			img.onload = function(){ //图片加载完成后在把图片元素添加到li中
+				li.appendChild(img);
+				//img.style.opacity = 1; //直接设置是没有透明度动画加载效果的，因为图片加载完成但并没有渲染(绘制)到页面上，此时transtion是不起作用，渲染时间很短,以毫秒计，只需加点延迟即可
+				setTimeout(function(){
+					img.style.opacity = 1;
+				},30)
+			}
+		}
+		//滑屏
+		function setScroll(){
+			mScroll({
+				el: box,
+				start: function(e){  //touchstart回调函数
+					//判断是否已经滑动到了最底部，来显示加载更多
+					//var innerTop = inner.getBoundingClientRect().top; //滚动元素距离顶部的距离，包含滚动条，此处即滚动条的距离减去header的高度
+					var innerTop = Math.round(cssTooL(inner, "translateY")) - 5; //允许5px的误差
+					var maxHeight = box.clientHeight - inner.offsetHeight; //可滚动的最大距离即两个元素的高度差，offsetHeight可包含滚动条的高度
+					if (maxHeight >= innerTop) {
+						//console.log("用户是在底部进行拖拽");
+						footer.style.opacity = 1;
+						isEnd = true;
+					} else {
+						footer.style.opacity = 0;
+						isEnd = false;
+					}
+				},
+				move: function(e){  //touchmove回调函数
+					createImg();  //加载图片
+				},
+				end: function(e){  //touchend回调函数
+					//加载更多的条件：滚动元素已经滚到到最底部并且用户是网上拖动
+					var innerTop = Math.round(cssTooL(inner, "translateY")) - 5; 
+					var maxHeight = box.clientHeight - inner.offsetHeight; 
+					if (isEnd && maxHeight >= innerTop) {
+						console.log("可以加载更多了");
+					}
+				},
+				over: function(e){  //滚动结束(包含惯性运动)回调函数
+				}
+			})
+		}
+	})()
+
+	//操作图片函数
+	function setBigImg(){
+		var imgPage = document.querySelector("#imgPage");
+		var bigImg = document.querySelector("#bigImg");
+		var navs = document.querySelectorAll("#imgNavs a");
+		var startRotate = 0; //两根手指起始旋转角度
+		var startScale = 0; //两根手指起始缩放比例
+		var maxScale = 1.5; //最大缩放比，屏幕尺寸是16rem，图片尺寸是10rem，最大使图片不超出边界
+		var minScale = 0.5; //最小缩放比
+		cssTooL(bigImg, "translateZ", 0.01);  //开启3D加速，提高性能
+		cssTooL(bigImg,"rotate",0);
+		cssTooL(bigImg,"scale",100); //工具函数里是先除以100获取
+		cssTooL(imgPage,"scale",0); 
+		setGesture({
+			el : bigImg,
+			start : function(e){
+				startRotate = cssTooL(this,"rotate");
+				startScale = cssTooL(this,"scale")/100;
+			},
+			change : function(e){
+				var scale = startScale * e.scale;
+				if (scale > maxScale) {
+					scale = maxScale;
+				} else if (scale < minScale) {
+					scale = minScale;
+				}
+				cssTooL(this, "scale", scale*100);
+				cssTooL(this, "rotate", startRotate + e.rotation);
+			},
+			end : function(e){
+				//图片旋转角度为90度的N倍，使图片摆正
+				var deg = cssTooL(this,"rotate");
+				deg = Math.round(deg/90);  //判断旋转了几个90deg
+				deg = deg * 90;
+				startMove({
+					el: this,
+					target:{rotate: deg},
+					type: "easeBoth",
+					time: 300
+				});
+			}
+		})
+
+		//向左旋转
+		navs[0].addEventListener("touchend",function(){
+			var deg = cssTooL(bigImg,"rotate");
+			deg = Math.round(deg/90) - 1;  //判断旋转了几个90deg
+			deg = deg * 90;
+			startMove({
+				el: bigImg,
+				target:{rotate: deg},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+
+		//向左旋转
+		navs[0].addEventListener("touchend",function(){
+			var deg = cssTooL(bigImg,"rotate");
+			deg = Math.round(deg/90) - 1;  //判断旋转了几个90deg
+			deg = deg * 90;
+			startMove({
+				el: bigImg,
+				target:{rotate: deg},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+
+		//向右旋转
+		navs[1].addEventListener("touchend",function(){
+			var deg = cssTooL(bigImg,"rotate");
+			deg = Math.round(deg/90) + 1;  //判断旋转了几个90deg
+			deg = deg * 90;
+			startMove({
+				el: bigImg,
+				target:{rotate: deg},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+
+		//放大
+		navs[2].addEventListener("touchend",function(){
+			var scale = cssTooL(bigImg, "scale")/100;
+			scale += 0.1;
+			if (scale > maxScale) {
+				scale = maxScale;
+			}
+			startMove({
+				el: bigImg,
+				target:{scale: scale*100},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+
+		//缩小
+		navs[3].addEventListener("touchend",function(){
+			var scale = cssTooL(bigImg, "scale")/100;
+			scale -= 0.1;
+			if (scale < minScale) {
+				scale = minScale;
+			}
+			startMove({
+				el: bigImg,
+				target:{scale: scale*100},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+	}
+
+	//设置多指操作事件，兼容ios、andiros
+	/**
+	 init:{
+		el : element, //操作的元素(必选参数)
+		start : fn, //gesturestart触发的回调函数
+		change : fn, //gesturechange触发的回调函数
+		end : fn, //gestureend触发的回调函数
+	 }
+	**/
+	function setGesture(init){
+
+		var el = init.el;
+		var istGesture = false; //判断是否进行多指操作
+		var startPoint = []; //屏幕上每根手指的坐标
+		if (!el) {
+			return;
+		}
+
+		el.addEventListener("touchstart", function(e){
+			//var touch = e.changedTouches[0];
+			if (e.touches.length >= 2) {  //触摸的手指大于等于了两根
+				istGesture = true; 
+				startPoint[0] = {x: e.touches[0].pageX,y: e.touches[0].pageY}; //第一根手指的坐标
+				startPoint[1] = {x: e.touches[1].pageX,y: e.touches[1].pageY}; //第二根手指的坐标
+				init.start&&init.start.call(el,e); //call修改this的指向为el，把事件对象e也传递过去
+			}
+		}, false)
+
+		el.addEventListener("touchmove", function(e){
+			//触发过start事件
+			if (istGesture && e.touches.length >= 2) {
+				var nowPoint = []; //当前屏幕上每根手指的坐标
+				nowPoint[0] = {x: e.touches[0].pageX,y: e.touches[0].pageY}; //第一根手指的坐标
+				nowPoint[1] = {x: e.touches[1].pageX,y: e.touches[1].pageY}; //第二根手指的坐标
+				var startDis = getDis(startPoint[0], startPoint[1]);  //两根手指的前后的长度
+				var startDeg = getDis(startPoint[0], startPoint[1]);  //两根手指的前后的旋转的角度
+				var nowDis = getDis(nowPoint[0], nowPoint[1]);  
+				var nowDeg = getDis(nowPoint[0], nowPoint[1]);  
+				e.scale = nowDis/startDis; //缩放比
+				e.rotation = nowDeg - startDeg; //旋转角度差
+				init.change&&init.change.call(el,e); 
+			}
+		}, false)
+
+		el.addEventListener("touchend", function(e){
+			//触发过start事件
+			if (istGesture) {
+				//e.touches.length < 2当前屏幕上的手指小于2，e.targetTouches.length < 1当前元素上的手指小于1
+				if (e.touches.length < 2 || e.targetTouches.length < 1) { 
+					istGesture = false; 
+					init.end&&init.end.call(el,e); 
+				}
+			}
+		}, false)
+
+
+	}
+	//勾股定理：已知直角三角形的两条边长度，求斜边的长度；斜边 = 边1的平方+边2的平方然后开平方根
+	function getDis(point1, point2){
+		var x = point2.x -point1.x;
+		var y = point2.y -point1.y;
+		return Math.sqrt(x*x + y*y);
+	}
+	//Math.atan2()斜率，由一条直线与x轴正方向所形成的角的正切，返回值是一个弧度，需转成角度
+	function getDeg(point1, point2){
+		var x = point2.x -point1.x;
+		var y = point2.y -point1.y;
+		return Math.atan2(y, x)*180/Math.PI; //返回值是一个弧度，需转成角度
+	}
+
+	//滚动函数
+	function mScroll(init){
+
+		if (!init.el) {
+			return;
+		}
+
+		//var inner = document.querySelector("#inner");
+		var inner = init.el.children[0];
+		var scrollBar = document.createElement("div");  //自定义滚动条
+		init.el.appendChild(scrollBar);
+		//cssTooL(inner,"translateY",200);
+		var startPoint = 0;  //手指按下时的y坐标
+		var startEl = 0;  //手指按下时元素的translateY的值
+		cssTooL(inner,"translateY",0);
+		cssTooL(inner,"translateZ",0.01); //开启3d硬件加速，提升效率
+		var lastY = 0; //上一次的元素位置，用来获取最后一次滑动的距离
+		var lastDis = 0; //最后一次滑动的距离，用来做滑动缓冲效果
+		var lastTime = 0; //上一次滑动的时间
+		var lastimeDis = 0; //时间差
+		var percent = 0.3; //超出边界时滑动阻力
+		//滑动缓冲，根据最后一次的滑动速度(滑动距离/滑动时间)来计算，最后一次滑动的速度越快，松开手指后惯性滑动的距离越长
+		var maxY = init.el.clientHeight - inner.offsetHeight; //上滑最大的距离，offsetHeight是内容高+padding+边框，但不加margin，clientHeight在页面上返回内容的可视高度
+		var scale = init.el.clientHeight/inner.offsetHeight; //根据比例计算滚动条的高度
+		scrollBar.style.cssText = "width:4px;background:rgba(0,0,0,.5);position:absolute;right:0;top:0;border-radius:2px;opacity:0;transition:.3s;";
+		inner.style.MinHeight = "100%";
+		init.el.addEventListener("touchstart", function(e) {
+			/*if(inner.style.height < Math.abs(maxY)){ //内容高度小于一屏时
+
+				return;
+			}*/
+			scrollBar.style.opacity = 1;
+			maxY = init.el.clientHeight - inner.offsetHeight; //如果是动态添加了内容，则需要修改下最大的滑动距离
+			if (maxY >= 0) { //内容高度小于一屏时
+				scrollBar.style.display = "none";
+			} else {
+				scrollBar.style.display = "block";
+			}
+			scale = init.el.clientHeight/inner.offsetHeight;
+			scrollBar.style.height = init.el.clientHeight*scale + "px";
+			clearInterval(inner.timer); //如果鼠标按下时在发生缓冲动画，则清除
+			//inner.style.webkitTransition = "none";    //去掉过渡
+			//inner.style.transition = "none";  //touchmove如果使用transition过度效果，则很难拖动
+			var touch = e.changedTouches[0];
+			startPoint = touch.pageY;
+			startEl = cssTooL(inner,"translateY");
+			lastY = startEl;
+			lastTime = new Date().getTime();
+			lastimeDis = lastDis = 0;
+			//init.start&&init.start(); //如果声明了回调函数则调用	
+			init.start&&init.start.call(init.el,e); //修改this指向为init.el
+		},false)
+
+		init.el.addEventListener("touchmove", function(e) {
+			var touch = e.changedTouches[0];
+			nowPoint = touch.pageY;
+			var nowTime = new Date().getTime();
+			var disY = nowPoint - startPoint;
+			var translateY = disY + startEl;
+			//超出边界增加滑动的阻力
+			if (translateY > 0) {  //上边界
+				translateY = translateY*percent
+			}else if(translateY < maxY) {  //下边界
+				translateY = maxY + disY*percent;
+			}
+			cssTooL(inner,"translateY",translateY);
+			cssTooL(scrollBar,"translateY",-translateY*scale);  //滚动条的滚动距离
+			lastDis = translateY - lastY;  //得到最后一次滑动的距离，滑动速度越快，差值越大，与滑动的距离无关
+			lastY = translateY;  //每次滑动同步上一次的元素位置为当前位置
+			lastimeDis = nowTime - lastTime;
+			lastTime = nowTime;  //同步当前时间为上一次时间
+			init.move&&init.move.call(init.el,e); //修改this指向为init.el
+		},false)
+
+		init.el.addEventListener("touchend", function(e) {
+			//var touch = e.changedTouches[0];
+			var type = "easeOut"; //动画类型
+			var speed = Math.round(lastDis/lastimeDis*10);  //最后一次的滑动速度，做缓冲效果,如果手指按下就松开，不进行移动，lastDis则是0，lastimeDis也会出现0的情况，导致得到的值是NAN或无穷大infinite
+			if (Math.abs(speed) < 5 || lastimeDis <= 0) speed =0;
+			var target = Math.round(speed*30 + cssTooL(inner,"translateY")); //缓冲的距离
+			//判断是否滑动到边界
+			if (target > 0) {
+				target = 0;
+				type = "backOut"; //超出边界时改为回弹动画，有一点抖动的感觉
+			} else if(target < maxY) {
+				target = maxY;
+				type = "backOut"; 
+			}
+			//console.log(speed);
+			//console.log(target);
+			
+			startMove({
+				el: inner,
+				target:{"translateY":target},
+				type: type,
+				time: Math.round(Math.abs(target-cssTooL(inner,"translateY"))*1.8), //如不流畅可设置为固定值如300
+				callIn: function(){  //动画执行中的回调函数
+					var target = cssTooL(inner,"translateY");
+					cssTooL(scrollBar,"translateY",-target*scale);
+					init.move&&init.move.call(init.el,e); //惯性滚动时也需执行touchmove的回调函数
+				},
+				callBack: function(){  //动画执行后的回调函数
+					scrollBar.style.opacity = 0;
+					init.over&&init.over.call(init.el,e); //惯性滚动结束后执行滚动完成的回调函数
+				}
+			});
+			
+			init.end&&init.end.call(init.el,e); //修改this指向为init.el
+		},false)
+	}
+	</script>
+</body>
+</html>

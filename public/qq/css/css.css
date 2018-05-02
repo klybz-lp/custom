@@ -1,0 +1,159 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+/* reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+a { text-decoration: none; }
+a, a:active, a:hover { outline: none; }
+input[type="button"], input[type="submit"], input[type="text"] { -webkit-appearance: none; }
+input, label { -webkit-tap-highlight-color: rgba(255, 0, 0, 0); }
+a, button, textarea, select { -webkit-appearance: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+textarea { resize: none; }
+img { border: 0; width: 100%; }
+.clear { clear: both; }
+.max640 { max-width: 640px; margin: auto; overflow: hidden }
+.none { display: none }
+html, body { height: 100%; background: #fff; overflow: hidden; position: relative; /*避免有绝对定位的元素，使overflow: hidden失效*/ }
+body { height: 100%; overflow: hidden; font-family: 'Helvetica'; }
+
+/*移动端是不支持包含微软雅黑在内的任何中文字体，都是使用手机自带的字体，使用@font-face 定义为微软雅黑字体并存放到 web 服务器上，在需要使用时被自动下载，会消耗很大流量，建议使用默认字体*/
+
+/* header footer */
+#header { height: 1.51rem;/*background: url(../images/footer.png) no-repeat;*/ background: #262c3b; background-size: cover; font-size: .6rem; line-height: 1.511rem; color: #fff; text-align: center; position: relative; }
+#header span { position: absolute; right: .5rem; font-size: 1rem; cursor: pointer; }
+#footer { width: 100%; height: 1.62rem; padding: .2rem 0;/*background: url(../images/footer.png) no-repeat;*/ background-size: cover; background: #fff; position: absolute; left: 0; bottom: 0; border-top: 1px solid #dbdbdb; display: flex; display: -webkit-flex; flex-wrap: nowrap; justify-content: center; align-items: flex-end; overflow: hidden; }
+#footer a { color: #666; display: block; width: 3rem; text-align: center; }
+#footer a img { width: 24px; }
+#footer a p { font-size: .45rem; line-height: .6rem; }
+
+/* loading1 */
+
+/* .monster { width: 110px; height: 110px; background-color: #E55A54; border-radius: 20px; position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column; cursor: pointer; margin: 10px; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); position: relative; animation: jumping 0.8s infinite alternate; }
+.monster .eye { width: 40%; height: 40%; border-radius: 50%; background-color: #fff; display: flex; justify-content: center; align-items: center; }
+.monster .eyeball { width: 50%; height: 50%; border-radius: 50%; background-color: #0C4475; }
+.monster .mouth { width: 32%; height: 12px; border-radius: 12px; background-color: white; margin-top: 15%; }
+.monster:before, .monster:after { content: ""; display: block; width: 20%; height: 10px; position: absolute; left: 50%; top: -10px; background-color: #fff; border-radius: 10px; }
+.monster:before { transform: translateX(-70%) rotate(45deg); }
+.monster:after { transform: translateX(-30%) rotate(-45deg); }
+.monster, .monster * { transition: 0.5s; }
+.monster.blue { background-color: #0C4475; animation-delay: 0.5s; }
+.monster.blue .mouth, .monster.blue .eyeball { background-color: #E55A54; }
+@keyframes jumping {
+	50% { top: 0; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); }
+	100% { top: -50px; box-shadow: 0px 120px 50px rgba(0, 0, 0, 0.2); }
+}
+@keyframes eyemove {
+	0%, 10% { transform: translate(50%); }
+	90%, 100% { transform: translate(-50%); }
+}
+.monster .eyeball { animation: eyemove 1.6s infinite alternate; }
+.pageLoading { position: fixed; width: 100%; height: 100%; left: 0; top: 0; display: flex; justify-content: center; align-items: center; background-color: #0C4475; flex-direction: column; transition: opacity 0.5s 0.5s; }
+.pageLoading.complete { opacity: 0; }
+.pageLoading.complete .monster { transform: scale(0.01) rotate(360deg); }
+.loading { width: 200px; height: 8px; margin-top: 80px; border-radius: 5px; background-color: #fff; overflow: hidden; transition: 0.5s; }
+.loading .bar { background-color: #E55A54; width: 0%; height: 100%; } */
+
+/* loading2 */
+
+/* .loading { background: #fff; animation: hue 10s linear infinite; min-height: 100%; }
+.loader { position: absolute; text-align: center; width: 100%; height: 2em; top: 50%; margin-top: -1em; }
+.loader_letter { text-transform: uppercase; text-shadow: 0px 0px 10px #666; color: #000; font-family: "Helvetica", sans-serif; font-weight: bold; padding: 0 .2em; font-size: 1em; line-height: 1; position: relative; display: inline-block; animation: bounce 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) infinite alternate; }
+.loader_letter:nth-child(1) { animation-delay: 0s; }
+.loader_letter:nth-child(2) { animation-delay: 0.05s; }
+.loader_letter:nth-child(3) { animation-delay: 0.1s; }
+.loader_letter:nth-child(4) { animation-delay: 0.15s; }
+.loader_letter:nth-child(5) { animation-delay: 0.2s; }
+.loader_letter:nth-child(6) { animation-delay: 0.25s; }
+.loader_letter:nth-child(7) { animation-delay: 0.3s; }
+@keyframes bounce {
+	0% { transform: translateY(0px); }
+	100% { transform: translateY(-1em); }
+}
+@keyframes hue {
+	0% { filter: hue-rotate(0deg); }
+	100% { filter: hue-rotate(360deg); }
+} */
+
+/* loading3 */
+#loading {position: absolute;left: 0;right: 0;top: 2rem;bottom: 1.62rem;z-index: 2;background: #fff; margin: 0 auto; box-sizing: border-box;}
+.card { display: flex; width: 100%; height: 100%; justify-content: center; align-items: center; }
+.loading-icon { border-radius: 50%; width: 40px; height: 40px; border: 0.15rem solid #ddd; border-top-color: #333; display: inline-block; -webkit-animation-name: spin; -webkit-animation-duration: 1s; -webkit-animation-iteration-count: infinite; animation-name: spin; animation-duration: 1s; animation-iteration-count: infinite; }
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes spin {
+	0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+.perpetuum-mobile { -webkit-animation-timing-function: cubic-bezier(0.55, 0.15, 0.45, 0.85); animation-timing-function: cubic-bezier(0.55, 0.15, 0.45, 0.85); }
+
+/* main */
+#main { position: absolute; left: 0; right: 0; top: 1.51rem; bottom: 2rem; overflow: hidden; background: #282828; }
+
+/*touchmove过程中如果使用transition动画，滑屏会出现晃动效果*/
+#swiperContainer { min-height: 100%; background: #f7f7f7;opacity: 0; /* transition: all 0.5s ease-in-out;  -webkit-transition: all 0.5s ease-in-out; */ -webkit-overflow-scrolling: touch;}/*-webkit-overflow-scrolling: touch手指上下滑动松开后，元素会惯性滑动一点距离,仅ios支持*/
+#swiperContainer ul li { width: 10.8rem; height: 2.29rem; border-bottom: 1px solid #dedfe0; background: #fff; }
+#swiperContainer ul .active {background: #edfaff;}
+
+/*宽度即设计稿的宽度*/
+.scrollContainer { width: 20.18rem; height: 2.29rem; display: flex; display: -webkit-flex; }
+
+/*width为信息宽度10.8rem+3个按钮的宽度9.38rem*/
+.view { width: 10.8rem; padding: .28rem .32rem; box-sizing: border-box; display: flex; display: -webkit-flex; }
+
+/*border-box是怪异模型，可不用减去padding和border的宽高*/
+.avatar { width: 1.75rem; height: 1.75rem; border-radius: 50%;/*background: url(../images/footer.png) no-repeat center;*/ background-image: linear-gradient(-180deg, rgba(255, 61, 127, 0.80) 0%, #7295F4 98%); background-size: cover; }
+.info { width: 6.5rem; margin: 0 0 0 .45rem; }
+.info h3 { width: 6.5rem; font-size: .55rem; line-height: 1rem; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+
+/*字体大小可用选择工具选中文字，用字体的高度来设置为字体的大小*/
+.info p { width: 6.5rem; font-size: .4rem; line-height: .6rem; color: #5f5d5d; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.aside { width: 1.5rem; text-align: center; }
+.aside time { display: block; margin-top: .17rem; font-size: .38rem; line-height: .8rem; }
+.aside mark { float: right; padding: 0 .22rem; font-size: .36rem; line-height: .7rem; border-radius: .35rem; background: #f74c31; color: #fff; text-align: center; margin-right: .5rem; }
+.btns { width: 6.5rem; }
+.btns a { float: left; height: 2.29rem; font-size: .4rem; line-height: 2.29rem; text-align: center; color: #fff; }
+.btns a:nth-of-type(1) { width: 2rem; background: #c7c7dd; }
+.btns a:nth-of-type(2) { width: 2.5rem; background: #ff9d00; }
+.btns a:nth-of-type(3) { width: 2rem; background: #ff3a30; }
+
+#load {
+	position: absolute;
+	left: 0;
+	top: -2.4rem;
+	width: 100%;
+	height: 2.4rem;
+}
+.loadImg {
+	position: absolute;
+	left: 2.5rem;
+	top: .2rem;
+	width: .8rem;
+	height: 2rem;
+	background: url("../images/load.png") no-repeat center;
+	background-size: cover;
+}
+.loadImg2 {
+	display: none;
+	position: absolute;
+	left: 4rem;
+	top: .95rem;
+	width: .5rem;
+	height: .5rem;
+	background: url("../images/loading.gif") no-repeat center;
+	background-size: cover;
+}
+.loadText {
+	display: block;
+	font: .4rem/2.4rem "宋体";
+	color: #fff;
+	text-align: center;
+}

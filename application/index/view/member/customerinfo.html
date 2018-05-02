@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>现场辅助功能</title>
+    <style>
+        *{ margin:0; padding:0}
+        input{ border:1px solid #000; height:30px; line-height:30px;}
+        td{ border:1px solid #ccc; text-align:center}
+        .fields p{ padding-top:40px; padding-bottom:40px; border:1px solid #000; text-align:center; margin:5px 0 5px 0; background:#006699;}
+        a{  color:#fff; font-size:20px; text-decoration:underline}
+        a.tit{ font-size:16px; font-weight:bold;  padding:5px; background:#000000; color:#fff; width:100px; float:left; border-right:1px solid #fff; text-align:center; height:30px; line-height:30px;}
+        a.on{ background:red}
+
+        .kefu{ padding:10px; width:120px; float:left}
+    </style>
+
+</head>
+<body>
+<div class="fields">
+    <div style="text-align:center; padding-top:10px; font-size:20px;">广州紫馨整形美容医院</div>
+    <p><a href="{:url('member/getsiteinfo')}">查询全场入座情况</a></p>
+    <!--<p><a href="myreach.php">查询我的顾客到场情况(按现场客服)</a></p>
+    <p><a href="myreach2.php">查询我的顾客到场情况(按邀约人)</a></p>-->
+    <p><a href="{:url('member/getinfobyname')}">按顾客姓名查询信息</a></p>
+    <p><a href="{:url('member/getinfobytel')}">按顾客电话查询信息</a></p>
+    <p><a href="{:url('member/getinfobysite')}">按座位号查询顾客信息</a></p>
+</div>
+
+</body>
+</html>

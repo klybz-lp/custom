@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+  <title>翻转显示反面</title>
+</head>
+<body>
+  <style>
+    body,div,span {margin: 0;}
+    #wrap {width: 200px;height:200px;margin: 50px auto;-webkit-perspective:800px;perspective:800px;-webkit-transform-style:preserve-3d; transform-style:preserve-3d; position: relative;transition: 2s;-webkit-transition: 2s;}
+    #wrap span {width: 200px;height:200px;display:block;color:#fff;font-size:20px;text-align: center;line-height: 200px;position: absolute;left: 0;top: 0;}
+    #wrap span:nth-of-type(1) {background:#f00;transform: rotateY(180deg);}  /*让div翻转180度后显示这一面*/
+    #wrap span:nth-of-type(2) {background:green;} 
+</style>
+
+<div id="wrap">
+    <span>反面</span>
+    <span>正面</span>
+</div>
+<script>
+var wrap = document.querySelector("#wrap");
+var span = wrap.querySelectorAll('span');
+var i = 0;
+wrap.addEventListener('touchend',function(){
+  i++;
+  console.log(i)
+  this.style.WebkitTransform="rotateY("+-180*i+"deg)";
+  this.style.transform="rotateY("+-180*i+"deg)";
+},false)
+</script>    
+</body>
+</html>

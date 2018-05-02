@@ -1,0 +1,214 @@
+@charset "utf-8";
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+a,
+input,
+button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+input,
+button {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+header,
+footer,
+nav,
+aside,
+section,
+h1,
+h2,
+p,
+div,
+span,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+a:focus {
+  outline: none;
+  -moz-outline: none;
+}
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+img {
+  vertical-align: top;
+  /*移动端除去图片边框*/
+}
+body * {
+  -webkit-user-select: none;
+  font-family: Helvetica;
+}
+body {
+  margin: 0;
+  -webkit-user-select: none;
+  /*禁止用户选择文本*/
+  -webkit-text-size-adjust: 100%;
+  /*禁止横竖屏切换时的字体改变*/
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative; /*解决ios10下overflow: hidden不起作用*/
+}
+#header {
+  height: 2rem;
+  background: #ef3239;
+  position: absolute;
+  width: 16rem;
+  /*设计稿的宽度是640px*/
+  left: 0;
+  top: 0;
+  border-bottom: 1px solid #a82d31;
+  box-sizing: border-box;
+  z-index: 10;
+}
+#header a {
+  width: 3.2rem;
+  height: 2rem;
+  line-height: 2rem;
+  position: absolute;
+  top: 0;
+  text-align: center;
+}
+#header #task {
+  left: 0;
+}
+#header #task span {
+  font-size: 0.8rem;
+}
+#header #refresh {
+  right: 0;
+}
+#header #refresh span {
+  font-size: 0.8rem;
+}
+#header span {
+  color: #fff;
+}
+#header h1 {
+  text-align: center;
+  font-size: 0.825rem;
+  color: #fff;
+  line-height: 2rem;
+}
+#header h1 span {
+  font-size: 0.625rem;
+  margin-right: 0.375rem;
+}
+.active {
+  color: #f23838 !important;
+}
+#nav {
+  height: 2.625rem;
+  background: #fdfdfd;
+  border-top: 1px solid #b0b0b0;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  width: 16rem;
+  position: absolute;
+  left: 0;
+  top: 2rem;
+  z-index: 10;
+}
+#nav .active span {
+  width: 0.9rem;
+  top: 0.15rem;
+  margin-left: 0.075rem;
+}
+#nav a {
+  float: left;
+  width: 25%;
+  height: 2.625rem;
+  line-height: 2.625rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #848689;
+}
+#nav a .glyphicon-filter {
+  font-size: 0.875rem;
+  top: 0.15rem;
+}
+#spanBox {
+  width: 0.875rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+#spanBox span {
+  float: left;
+  font-size: 0.65rem;
+}
+#spanBox .glyphicon-chevron-down {
+  top: -0.075rem;
+}
+#wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 4.625rem;
+  bottom: 2rem;
+  overflow: hidden; 
+}
+#inner li {
+  border-bottom: 1px solid #e0e0e0;
+  box-sizing: border-box;
+}
+#inner a {
+  padding: 0.55rem 0.55rem 0.375rem 0.5rem;
+  height: 5.75rem;
+  display: block;
+}
+#inner img {
+  width: 5rem;
+  height: 5rem;
+  float: left;
+}
+#inner .spanWrap {
+  float: right;
+  width: 9.75rem;
+}
+#inner .sTitle {
+  font-size: 0.7rem;
+  line-height: 1.1rem;
+  color: #333;
+  margin-top: 0.1rem;
+  display: block;
+}
+#inner .sPrice {
+  font-size: 0.95rem;
+  line-height: 1.6rem;
+  color: #f23838;
+  display: block;
+  margin-top: 0.3rem;
+}
+#inner .sComment {
+  font-size: 0.7rem;
+  line-height: 1.1rem;
+  color: #808080;
+  display: block;
+}
+#footer{
+  height: 2rem;
+  background: #ef3239;
+  position: absolute;
+  width: 16rem;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  line-height: 2rem;
+  color: #fff;
+  font-size: .8rem;
+}

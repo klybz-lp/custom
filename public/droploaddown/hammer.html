@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" charset="UTF-8">
+     <title>推荐使用的触屏设备手势库hammer</title>
+     <script type="text/javascript" src="js/hammer.min.js"></script>
+     <style type="text/css">
+     	 * {box-sizing: border-box;}
+         html, body {
+             width: 100%;
+             height: 100%;
+             margin: 0px;
+             padding: 0px;
+         }
+ 
+         .test {
+             width: 100%;
+             height: 30%;
+             background: #ffd800;
+             text-align: left;
+         }
+ 
+         .result {
+             width: 100%;
+             height: 30%;
+             background: #b6ff00;
+             text-align: left;
+             overflow: hidden;
+         }
+
+		.square {
+		  width: 90px;
+		  height: 90px;
+		  background-color: #00B0FF;
+		  transition: transform 300ms ease-out;
+		  margin:10px auto;
+		}
+
+		.expand {
+		  transform: scale(2.5);
+		}
+     </style>
+ </head>
+ <body>
+     <div id="test" class="test">事件区域</div>
+     <div id="result" class="result">事件结果<br /></div>
+
+     <div class="square"></div>
+     <script type="text/javascript">
+
+     	 //解决双击会触发两次单击事件
+     	 /*document.addEventListener("DOMContentLoaded", function () {
+		    var myElement = document.querySelector('#test')
+
+		    var hammer = new Hammer.Manager(myElement);
+
+		    hammer.add( new Hammer.Tap({ event: 'doubletap', taps: 2 }) );
+		    hammer.add( new Hammer.Tap({ event: 'singletap' }) );
+
+		    hammer.get('doubletap').recognizeWith('singletap');
+		    hammer.get('singletap').requireFailure('doubletap');
+
+
+		    hammer.on('doubletap', function(ev) {
+		        console.log(ev.type);
+		    }).on('singletap', function(ev) {
+		        console.log(ev.type);
+		    });
+		});*/
+     	 //https://www.cnblogs.com/qianduanjingying/p/5812139.html  http://www.360doc.com/content/16/1018/12/597197_599329362.shtml  https://www.cnblogs.com/lxg0/p/7308733.html
+         //创建一个新的hammer对象并且在初始化时指定要处理的dom元素，默认为这个dom元素添加一系列识别器，包括 tap<点>, doubletap<双点击>, press<按住>, 水平方位的pan<平移> 和 swipe<快速滑动>, 以及多触点的 pinch<捏放，两个手指操作> 和 rotate<旋转>识别器。
+         var hammer = new Hammer(document.getElementById("test"));
+         //var hammer = document.querySelector('#test');
+         //添加事件, Pan事件指定的dom区域内，一个手指放下并移动事件，即触屏中的拖动事件。这个事件在屏触开发中比较常用，如：左拖动、右拖动等。该事件还可以分别对以下事件进行监听并处理：Panstart：拖动开始、Panmove：拖动过程、Panend：拖动结束、Pancancel：拖动取消、Panleft：向左拖动、Panright：向右拖动、Panup：向上拖动、Pandown：向下拖动,swipe滑动和pan类似,但滑动更快速,无粘滞.
+         //允许识别器识别垂直方位或全部方位的 pan 和 swipe事件
+         //hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+		 //hammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+		 //swipe参数
+		 /*选项	      默认					描述
+		 event	    rotate					事件名称
+		 pointers	1						必需的指针，最小为2。
+		 threshold	10						识别前需要的最小距离。
+		 direction	DIRECTION_ALL			平移方向。
+		 velocity	0.3						识别之前所需的最小速度，单位为px / ms。*/
+		 hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+		 //hammer.get('swipe').set({ velocity: 0 }); //修改morning参数，为0即慢慢的滑动也能触发事件
+	     hammer.on('swipeleft', logEventType)
+	    	.on('swiperight', logEventType)
+	    	.on('swipeup',logEventType)
+	    	.on('swipedown', logEventType);
+
+			function logEventType(ev) {
+			    console.log(ev.type);
+		}
+
+		 //pinch 和 rotate 默认是不可用的，因为它们可能会导致元素被卡住，如果你想启用它们，可以加上这两句：
+		 /*hammer.get('pinch').set({ enable: true });
+		 hammer.get('rotate').set({ enable: true });*/
+
+         /*hammer.on("pan", function (e) {
+             document.getElementById("result").innerHTML += "X偏移量：【" + e.deltaX + "】，Y偏移量：【" + e.deltaY + "】<br />";
+             console.log(e);
+         });*/
+		 //长按事件
+         /*hammer.on("press", function (e) {
+             document.getElementById("result").innerHTML += "超过500ms了<br />";
+             console.log(e);
+         });*/
+         //点击事件
+         /*hammer.on("tap", function (e) {
+             document.getElementById("result").innerHTML += "点击触发了，长按无效<br />";
+             //控制台输出
+             console.log(e);
+         });*/
+		 //双击事件
+         /*hammer.on("doubletap", function (e) {
+             document.getElementById("result").innerHTML += "双击点击触发了，单击与长按无效<br />";
+             //控制台输出
+             console.log(e);
+         });*/	
+         //左滑事件swipeleft， swiperight  swipedown  swipeup 后面两个需打开hammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+        /* hammer.on("swipeup", function (e) {
+            document.getElementById("result").innerHTML += "X偏移量：【" + e.deltaX + "】，Y偏移量：【" + e.deltaY + "】<br />"
+             //控制台输出
+             console.log(e);
+         });*/
+
+
+		// 点击元素进行放大及缩小，Hammer.Manager表示用自定义的事件来操作，通过Hammer.Manager()创建的hammer实例默认是没有任何事件的，接着我们可以使用add来添加事件
+		/*var square = document.querySelector('.square');
+		// Create a manager to manage the element
+		var manager = new Hammer.Manager(square);
+		var Tap = new Hammer.Tap({
+		  taps: 1  //1表示是单击
+		});
+
+		manager.add(Tap);
+		manager.on('tap', function(e) {
+		  e.target.classList.toggle('expand');
+		});
+
+		//双击触发
+		var DoubleTap = new Hammer.Tap({
+		  event: 'doubletap',
+		  taps: 2
+		});
+		manager.add(DoubleTap);
+		manager.on('doubletap', function(e) {
+		  e.target.classList.toggle('expand');
+		});
+
+
+		//长按进行放大与缩小
+		var Press = new Hammer.Press({
+		  time: 500
+		});
+		manager.add(Press);
+		manager.on('press', function(e) {
+		  e.target.classList.toggle('expand');
+		});
+
+
+		//左滑  右滑 触发
+		var Swipe = new Hammer.Swipe();
+		manager.add(Swipe);
+		var deltaX = 0;
+		var deltaY = 0;
+
+		manager.on('swipe', function(e) {
+		  deltaX = deltaX + e.deltaX;
+		  var direction = e.offsetDirection;
+		  var translate3d = 'translate3d(' + deltaX + 'px, 0, 0)';
+		  
+		  if (direction === 4 || direction === 2) {  // 2和4表示左右，8和16表示上下
+		    e.target.innerText = deltaX;
+		    e.target.style.transform = translate3d;
+		  }
+		});*/
+		
+
+</script>
+
+
+     </script>
+ </body>
+ </html>

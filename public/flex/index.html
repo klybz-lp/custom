@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>flex与box布局</title>
+	<style>
+		body {margin:0;}
+		/*
+		 老版弹性盒模型(兼容性高)父元素样式：display: -webkit-box;display: -webkit-inline-box;
+		 新版弹性盒模型父元素样式(部分老版的国产手机自带浏览器不支持，如老版华为)：display: -webkit-flex;display: flex;
+		 主轴反向即flex-direction定义的方向，默认是水平方向
+		 提高兼容性可两者结合使用：width: 0px;是为了避免每个元素的宽度不一致(如字体个数不同等)，而导致flex-grow属性不能使每个元素大小保持一致
+		.rows{
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: flex;
+			padding: 0.4rem 0.5rem 0;
+		}
+		.rows div{
+			width: 0px; 
+			-webkit-box-flex:1;
+			flex-grow: 1;
+		}
+		*/
+		/*新版弹性盒模型
+		定义主轴(自带反向)：flex-direction: row|column|row-reverse|column-reverse，反向时整体会整体右/下对齐
+		主轴方向富余空间管理：justify-content:flex-start | flex-end | center | space-between | space-around;
+		交叉轴方向富余空间管理：align-items:flex-start | flex-end | center | baseline | stretch; stretch会拉伸每个元素，使每个元素的高度一致
+		以下属性是应用在子元素
+		元素弹性空间：
+		flex-grow 定义弹性盒子元素扩展比率,flex-grow:1;平均布满整个空间，子元素的width属性会失效,可对某个元素固定宽度，其他元素平均分配剩余空间，如li:nth-of-type(2){width:200px;} li:nth-of-type(1),li:nth-of-type(3){flex:1;},
+		li:nth-of-type(2)flex:2;} li:nth-of-type(1),li:nth-of-type(3){flex:1;} 第二个元素的宽度是其他的2倍
+		flex-shrink 定义弹性盒子元素的收缩比率
+		flex-basis 指定了flex item在主轴方向上的初始大小。如果不使用box-sizing来
+		改变盒模型的话，那么这个属性就决定了flex item的内容盒content-box）的宽 或者高（取决于主轴的方向）的尺寸大小。
+
+		Tip:需要注意的是，在上面的最后的flex-grow、flex-shrink、flex-basis 三个属性最好相互搭配使用。
+		定义flex子项单独在侧轴（纵轴）方向上的对齐方式align-self stretch|center|flex-start|flex-end|baseline
+		定义单个元素的顺序：order 可接受0或赋值
+		*/
+		#box {height:300px;border: 1px solid #ccc;display: -webkit-flex;display: flex;justify-content:space-around;align-items:stretch;}
+		#box div {width: 50px;height:50px;background: #f00;text-align: center;line-height: 50px;color: #fff;}
+		#box div:nth-of-type(2) {height: 100px;}
+		/*老版弹性盒模型,Webkit内核的浏览器，必须加上-webkit前缀。
+		定义主轴：box-orient: horizontal|vertical;
+		反向排列：box-direction: reverse; 反向时整体整体依然是左/上对齐
+		控制容器内的子元素是被强制放在一行flex-wrap:nowrap | wrap | wrap-reverse; 
+		主轴方向富余空间管理：-webkit-box-pack:start | end | center | justify;  justify即水平等分父容器宽度/高度即flex的space-between(多余空间平均分布在每个元素的之间)效果,旧版不支持flex的space-around效果(即多余空间平均分布在每个元素的两边)
+		交叉轴方向富余空间管理：box-align: start | end | center | stretch
+		以下属性是应用在子元素
+		元素弹性空间：-webkit-box-flex:1;配合box-sizing: border-box;使用
+		定义单个元素的顺序：-webkit-box-ordinal-group 
+		*/
+		/* #box {width:100%;height:300px;border: 1px solid #ccc;display: -webkit-box;display: -webkit-inline-box;text-align: center;color: #fff;-webkit-box-pack:justify;overflow: hidden;}
+		#box div {width: 50px;height:50px;background: #f00;line-height: 50px;}  */
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+	</div>
+</body>
+</html>

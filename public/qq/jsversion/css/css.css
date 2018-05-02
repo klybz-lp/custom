@@ -1,0 +1,63 @@
+body{
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+}
+body,html{
+	height: 100%;
+	background: #fff;
+	overflow: hidden;
+	position: relative; /*避免有绝对定位的元素，导致overflow: hidden失效*/
+}
+ul,li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+h3,p{
+	margin: 0;	
+	padding: 0;		
+}
+img{
+	vertical-align: top;
+}
+em{
+	font-style: normal;
+}
+mark{
+	background: none;
+}
+input,
+a,
+button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-appearance: none;
+}
+a {
+  text-decoration: none;
+}
+
+/*header*/
+#header {height: 1.51rem;/*background: url(../images/footer.png) no-repeat;*/background: #2f2fec;background-size: cover;font: .7rem/1.511rem '微软雅黑';color: #fff;text-align: center;position: relative;}
+#header span {position: absolute;right: .5rem;font: 1rem/1.511rem '微软雅黑';cursor: pointer;}
+#footer {width: 100%;height: 1.62rem;/*background: url(../images/footer.png) no-repeat;*/background-size: cover;background: #2f2fec;position: absolute;left: 0;bottom: 0;}
+
+/*main*/
+#main {position: absolute;left: 0;right: 0;top: 1.51rem;bottom: 1.62rem;overflow: hidden;background: #282828;}
+#swiper {min-height: 100%;background: #fff;}
+#list {}
+#list li {width: 10.8rem;height: 2.29rem;border-bottom: 1px solid #dedfe0;background: #fff;} /*宽度即设计稿的宽度*/
+.swiper{width: 20.18rem;height: 2.29rem;}/*width为信息宽度10.8rem+3个按钮的宽度9.38rem*/
+.view{width: 10.8rem;float: left;padding: .28rem .42rem;box-sizing:border-box;}/*border-box是怪异模型，可不用减去padding和border的宽高*/  
+.avatar{width: 1.75rem;height: 1.75rem;float: left;border-radius: 50%;/*background: url(../images/footer.png) no-repeat center;*/background: #319619;background-size: cover;}
+.info{width: 5rem;margin:0 0 0 .45rem;float: left;}
+.info h3{width: 5rem;font: bold .5rem/1rem '微软雅黑';white-space: nowrap;text-overflow: ellipsis;overflow: hidden;} /*字体大小可用选择工具选中文字，用字体的高度来设置为字体的大小*/
+.info p{width: 5rem;font: .4rem/.6rem '微软雅黑';white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.aside{width: 2.5rem;float: right;}
+.aside time {display: block;text-align: right;margin-top: .17rem;font: .38rem/.8rem '微软雅黑';}
+.aside mark {float: right;padding: 0 .22rem;font: .36rem/.7rem '微软雅黑';border-radius: .35rem;background: #f74c31;color: #fff;text-align: center;margin-right: .5rem;}
+.btns{width: 9.38rem;float: left;}
+.btns a{float: left;height: 2.29rem;font: .4rem/2.29rem '微软雅黑';text-align: center;color: #fff;}
+.btns a:nth-of-type(1){width: 2.94rem;background: #c7c7dd;}
+.btns a:nth-of-type(2){width: 3.5rem;background: #ff9d00;}
+.btns a:nth-of-type(3){width: 2.94rem;background: #ff3a30;}

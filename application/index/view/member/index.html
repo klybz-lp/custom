@@ -1,0 +1,233 @@
+﻿{extend name="public/base" /}
+{block name="seo"}
+<title>{$title|default="邀约系统数据管理后台"}</title>
+<meta name="keywords" content="{keywords|default='数据管理后台'}">
+<meta name="description" content="{description|default='数据管理后台'}">
+{/block}
+<!--block标签里不写内容则表示去掉基础模板里部分内容-->
+{block name='header'}{/block}
+{block name='aside'}{/block}
+{block name="content"}
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 客户管理 <span class="c-gray en">&gt;</span> 客户列表 <a class="btn btn-success radius r" id="btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<form method="get" action="">
+		<div class="text-c">
+			<span class="select-box inline">
+				<select name="select" class="select">
+					<option value="yaoyue">邀约人</option>
+					<option value="kefu">接待员</option>
+					<option value="name">姓名</option>
+					<option value="tel">电话</option>
+				</select>
+			</span>
+			<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话、邀约人或客服" id="uname" name="name">
+			日期范围：
+			{literal}
+			<input type="text" name="fromDate" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
+			-
+			<input type="text" name="toDate" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
+			{/literal}
+			<button type="submit" class="btn btn-success radius" name=""><i class="Hui-iconfont">&#xe665;</i> 筛选</button>
+			<button type="button" onclick="location.href='{:url('/index/member/index')}'"
+					class="btn btn-primary radius"><i
+					class="Hui-iconfont">&#xe665;</i> 全部</button>
+		</div>
+	</form>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="member_add('添加客户','{:url("member/create")}','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加客户</a>  <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+		<form name="form2" action="{:url('member/updata')}" method="post" enctype="multipart/form-data" style="display:
+		inline-block;">
+			<span class="btn-upload form-group" style="margin-bottom: 0px; ">
+				<input class="input-text upload-url" type="text" name="file" id="file"
+					   placeholder="请上传包含顾客信息的文件"
+					   readonly=""
+					   style="width:200px">
+				<a href="javascript:void(0);" class="btn btn-primary upload-btn"><i class="Hui-iconfont"></i> 选择文件</a>
+				<input type="file" multiple="" name="filedata" class="input-file">
+
+			</span>
+		</form>
+		<a href="javascript:void(0);" class="btn btn-primary upload-btn"><i class="Hui-iconfont">&#xe600;</i> 批量添加
+		</a>
+		<a href="javascript:;" onclick="location.href='/template.csv'" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;
+		</i> 模板下载</a> </span>
+		{if !$Request.get.name}
+		<span class="r" style="padding-top: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;未到场人数：<strong>{$wdccount}</strong></span>
+		<span class="r" style="padding-top: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;已到场人数：<strong>{$xccount}</strong></span>
+		{/if}
+		<span class="r" style="padding-top: 6px;">总人数：<strong>{$count}</strong></span>
+	</div>
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-hover table-bg table-sort">
+			<thead>
+			<tr class="text-c">
+				<th width="10"><input type="checkbox" name="" value=""></th>
+				<th width="40">编号</th>
+				<th width="70">客户名</th>
+				<th width="100">电话</th>
+				<th width="90">级别</th>
+				<th width="100">邀约人</th>
+				<th width="100">现场客服</th>
+				<th width="50">桌号</th>
+				<th width="50">是否到场</th>
+				<th width="130">加入时间</th>
+				<th width="100">操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			{volist name='list' id='vo'}
+			<tr class="text-c">
+				<td><input type="checkbox" value="{$vo.id}" name="id"></td>
+				<td>{$num+$i}</td>
+				<td><u style="cursor:pointer" class="text-primary">{$vo.name}</u></td>
+				<td>{$vo.tel}</td>
+				<td>{$vo.type}</td>
+				<td>{$vo.yaoyue}</td>
+				<td>{$vo.kefu}</td>
+				<td>{if $vo.number}{$vo.number}{else/}未安排{/if}</td>
+				<td class="td-status">
+					{if condition="$vo.reach eq '1'"}
+					<span class="label label-success radius">已到</span>
+					{else /}
+					<span class="label label-defaunt radius">未到</span>
+					{/if}
+				</td>
+				<td>{$vo.addtime}</td>
+				<td class="td-manage"><a style="text-decoration:none" class="ml-5"
+										 onClick="yqh('获取邀请码','{:url("member/weixin")}','{$vo.id}','180','230')" href="javascript:;" title="获取邀请码"><i class="Hui-iconfont">获取邀请码&#xe63f;</i></a><a title="编辑" href="javascript:;" onclick="member_edit('编辑','{:url("member/edit",["id"=>$vo["id"]])}','{$vo.id}','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="member_del(this,'{$vo.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+			</tr>
+			{/volist}
+			</tbody>
+		</table>
+		<div class="container">
+			<div class="row" style="text-align: center;">
+				{$list->render()}
+			</div>
+		</div>
+	</div>
+</div>
+<!---邀请函上的二维码图片-->
+<iframe src="" style="display:none; position:absolute; z-index:2; left:50%; top:20%;" id="code_img"></iframe>
+{/block}
+
+{block name='js'}
+{js href="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js" /}
+{js href="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js" /}
+<!--<script type="text/javascript" src="__STATIC__/lib/laypage/1.2/laypage.js"></script>--> <!--通过数据库查询出所有数据分配到模板，然后js自动进行分页处理，适合数据不是特别多的页面-->
+<script type="text/javascript">
+	$(function(){
+		/*$('.table-sort').dataTable({
+			"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+			"bStateSave": true,//状态保存
+			"aoColumnDefs": [
+				//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+				{"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
+			]
+		});*/
+
+	});
+	/*客户-添加*/
+	function member_add(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+	/*客户-停用*/
+	function member_stop(obj,id){
+		layer.confirm('确认要停用吗？',function(index){
+			$.ajax({
+				type: 'POST',
+				url: '',
+				dataType: 'json',
+				success: function(data){
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+					$(obj).remove();
+					layer.msg('已停用!',{icon: 5,time:1000});
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});
+		});
+	}
+
+	/*客户-启用*/
+	function member_start(obj,id){
+		layer.confirm('确认要启用吗？',function(index){
+			$.ajax({
+				type: 'POST',
+				url: '',
+				dataType: 'json',
+				success: function(data){
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+					$(obj).remove();
+					layer.msg('已启用!',{icon: 6,time:1000});
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});
+		});
+	}
+	/*客户-编辑*/
+	function member_edit(title,url,id,w,h){
+		layer_show(title,url,w,h);
+	}
+	/*获取邀请码，生成两张二维码图片*/
+	function yqh(title,url,id,w,h){
+		//生成的显示在页面的二维码图片，扫描后显示的邀请函地址
+		var url = "http://www.liping768.com/index/member/getcode?id="+id;
+		url = encodeURIComponent(url);
+		codeurl = 'http://www.liping768.com/index/member/weixin?data='+url;
+		layer_show(title,codeurl,w,h);
+
+		//生成合并在邀请函上的二维码图片，扫码后显示的顾客姓名座位以及对应的现场客服信息
+		var url_reach = "http://www.liping768.com/index/member/reach?id="+id;
+		url_reach = encodeURIComponent(url_reach);
+		var codeurl_reach = 'http://www.liping768.com/index/member/weixin?data='+url_reach;
+		$("#code_img").attr("src",codeurl_reach);
+	}
+	/*客户-删除*/
+	function member_del(obj,id){
+		layer.confirm('确认要删除吗？',function(index){
+			$.get("{:url('member/delete')}",{id:id})
+
+			$(obj).parents("tr").remove();
+			layer.msg('记录已删除!',{icon:1,time:1000});
+		});
+	}datadel
+
+	/*客户-批量删除*/
+	function datadel(){
+		memId = $('input[name=id]');
+		var ids = '';
+		memId.each(function(){
+			if($(this).is(':checked')){
+				ids+=$(this).val()+',';
+			}
+		});
+		if(!ids){
+			layer.msg('请至少选择一条记录删除!',{icon:2,time:1000});
+		}else{
+			layer.confirm('确认要删除吗？',function(index) {
+				ids = ids.substring(0, ids.length - 1);
+				$.get("{:url('member/delete')}", {id: ids})
+				memId.each(function () {
+					if ($(this).is(':checked')) {
+						$(this).parents("tr").remove();
+					}
+				});
+				layer.msg('记录已删除!', {icon: 1, time: 1000});
+			})
+		}
+	}
+
+	/*客户-批量添加*/
+	$('.upload-btn').on('click',function () {
+		if ($('#file').val() == '') {
+			layer.msg('请上传文件!',{icon:2,time:1000});
+			return false;
+		}
+		$('form[name=form2]').submit();
+	})
+</script>
+{/block}

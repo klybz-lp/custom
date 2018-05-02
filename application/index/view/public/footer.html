@@ -1,0 +1,28 @@
+<!--_footer 作为公共模版分离出去-->
+{load href="__STATIC__/lib/jquery/1.9.1/jquery.min.js" /}
+{load href="__STATIC__/lib/layer/2.4/layer.js" /}
+{load href="__STATIC__/static/h-ui/js/H-ui.min.js" /}
+{load href="__STATIC__/static/h-ui.admin/js/H-ui.admin.js" /}
+
+<!--导入boostrap-->
+{load href="__STATIC__/lib/bootstrap/js/bootstrap.min.js" /}
+<!--/_footer 作为公共模版分离出去-->
+<!--下方写此页面业务相关的脚本-->
+{js href="__STATIC__/lib/jquery.contextmenu/jquery.contextmenu.r2.js" /}
+<script type="text/javascript">
+    $(function(){
+        $("#min_title_list li").contextMenu('Huiadminmenu', {
+            bindings: {
+                'closethis': function(t) {
+                    console.log(t);
+                    if(t.find("i")){
+                        t.find("i").trigger("click");
+                    }
+                },
+                'closeall': function(t) {
+                    alert('Trigger was '+t.id+'\nAction was Email');
+                },
+            }
+        });
+    });
+</script>

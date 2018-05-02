@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>touch.js demo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="js/touch.min.js"></script>
+    <script type="text/javascript" src="js/cat.touchjs.js"></script>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <div style="padding:20px;">
+        <div style="position:relative;width: 100%;height: 300px;overflow: hidden;border: 1px dashed #ff0000;">
+            <img id="targetObj" style="position:relative;transform-origin:center" src="http://demo.somethingwhat.com/images/flower1.jpg" />
+        </div>
+        <ul>
+            <li><span>left：</span><span id="left">0</span></li>
+            <li><span>top：</span><span id="top">0</span></li>
+            <li><span>scale：</span><span id="scale">1</span></li>
+            <li><span>rotate：</span><span id="rotate">0</span></li>
+        </ul>
+        <div>
+            <input type="button" value="保存并刷新" onclick="save()" />
+            <input type="button" value="重置" onclick="reset()" />
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var $targetObj = $('#targetObj');
+            //初始化设置
+            cat.touchjs.init($targetObj, function (left, top, scale, rotate) {
+                $('#left').text(left);
+                $('#top').text(top);
+                $('#scale').text(scale);
+                $('#rotate').text(rotate);
+                $targetObj.css({
+                    left: left,
+                    top: top,
+                    'transform': 'scale(' + scale + ') rotate(' + rotate + 'deg)',
+                    '-webkit-transform': 'scale(' + scale + ') rotate(' + rotate + 'deg)'
+                });
+            });
+            //初始化拖动手势（不需要就注释掉）
+            cat.touchjs.drag($targetObj, function (left, top) {
+                $('#left').text(left);
+                $('#top').text(top);
+            });
+            //初始化缩放手势（不需要就注释掉）
+            cat.touchjs.scale($targetObj, function (scale) {
+                $('#scale').text(scale);
+            });
+            //初始化旋转手势（不需要就注释掉）
+            cat.touchjs.rotate($targetObj, function (rotate) {
+                $('#rotate').text(rotate);
+            });
+        });
+        //保存并刷新
+        function save() {
+            var data = {
+                left: cat.touchjs.left,
+                top: cat.touchjs.top,
+                scale: cat.touchjs.scaleVal,
+                rotate: cat.touchjs.rotateVal
+            };
+            //本地存储
+            window.localStorage.cat_touchjs_data = JSON.stringify(data);
+            window.location = window.location;
+        };
+        //重置
+        function reset() {
+            var data = {
+                left: 0,
+                top: 0,
+                scale: 1,
+                rotate: 0
+            };
+            //本地存储
+            window.localStorage.cat_touchjs_data = JSON.stringify(data);
+            window.location = window.location;
+        };
+    </script>
+</body>
+</html>

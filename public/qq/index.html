@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+	<meta name="x5-fullscreen" content="true">
+
+	<meta name="full-screen" content="yes">
+	<!-- uc强制竖屏 -->
+	<meta name="screen-orientation" content="portrait">
+
+	<!-- UC强制全屏 --> 
+	<meta name="full-screen" content="yes">
+	<!-- UC应用模式 --> 
+	<meta name="browsermode" content="application">
+
+	<!-- QQ强制竖屏 -->
+	<meta name="x5-orientation" content="portrait">
+
+	<!-- QQ强制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+
+	<!-- QQ应用模式 -->
+	<meta name="x5-page-mode" content="app">
+
+	<title>Document</title>
+	
+	<script>
+	//meta标签控制使用全屏模式可解决上下滑动页面到顶部或底部时，页面就会出现黑色或白色的空白，即是boyd、html系统默认的touchmove事件
+	//根据屏幕大小设置html根元素的字体大小，通过psd文件的尺寸及手机屏幕的大小来计算html的字体大小作为rem的基准值，字体的大小、图片的宽度、高度、padding、margin等都通过该值来转换
+
+	(function () {
+
+		var html = document.documentElement;
+
+		//var width = html.getBoundingClientRect().width;
+
+		var width = html.clientWidth;
+
+		var fs = width/10.8;  //该psd文件的宽尺寸是1080px，除以10.8表示1rem即100px，psd像素一般是740*1136、1080*1920、1600合适，在谷歌浏览器-F12-手机端-选择response，将宽度改为1080时，html的font-szie为100px
+
+		html.style.fontSize = fs+"px";
+
+	})()
+
+</script>
+
+<link rel="stylesheet" href="css/css.css" />
+
+</head>
+
+<body>
+
+	<header id="header">消息<span>+</span></header>
+	<!-- load1 -->
+		<!-- <div class="pageLoading">
+		    <div class="monster">
+		        <div class="eye">
+		            <div class="eyeball"></div>
+		        </div>
+		        <div class="mouth"></div>
+		    </div>
+		    <div class="loading">
+		        <div class="bar"></div>
+		    </div>
+		</div> -->
+		<!-- load2 -->
+		<!-- <div class="loading">
+		    <div class="loader">
+		  		<span class="loader_letter">L</span>
+			  	<span class="loader_letter">o</span>
+			  	<span class="loader_letter">a</span>
+			  	<span class="loader_letter">d</span>
+			  	<span class="loader_letter">i</span>
+			  	<span class="loader_letter">n</span>
+			  	<span class="loader_letter">g</span>
+		    </div>
+		</div> -->
+		<!-- load3 -->
+		<div id="loading">
+		    <div class="card">
+		    	<div class="icon-container">
+		      	    <div class="loading-icon perpetuum-mobile"></div>
+		    	</div>
+		    </div>
+		</div>
+	<div id="main">
+		
+		<!-- 下拉滑动的区域 swiper -->
+
+		<div id="swiperContainer">
+			<div id="load">
+				<span class="loadImg"></span>
+				<span class="loadImg2"></span>
+				<span class="loadText">下拉刷新</span>
+			</div>
+			<ul id="list">
+				<!-- 左右滑动的区域 li-->
+				<!-- <li>
+							<div class="scrollContainer">
+								<div class="view">
+									<span class="avatar"></span>
+									<div class="info">
+										<h3>李平</h3>
+										<p>你有1条新消息，请注意查收！</p>
+									</div>
+									<aside class="aside">
+										<time>03-29</time>
+										<mark>1</mark>
+									</aside>
+								</div>
+								<nav class="btns">
+									<a href="javascript:void(0);">置顶</a>
+									<a href="javascript:void(0);">标记已读</a>
+									<a href="javascript:void(0);">删除</a>
+								</nav>
+							</div>
+						</li>	 -->		
+			</ul>
+		</div>
+	</div>
+
+	<footer id="footer">
+		<a href="javascript:void(0)"><img src="images/icon_01.png" alt=""><p>首页</p></a>
+		<a href="javascript:void(0)"><img src="images/icon_02.png" alt=""><p>消息</p></a>
+		<a href="javascript:void(0)"><img src="images/icon_03.png" alt=""><p>我的</p></a>
+	</footer>
+	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script>
+		// loading1
+		/*var percent = 0
+		var timer = setInterval(function(){
+  					// $(".bar").css("width",percent+"%")
+  					document.querySelector(".bar").style.setProperty("width",percent+"%")
+  					percent+=1
+  					if (percent>100){
+    					// $(".pageLoading").addClass("complete")
+    					document.querySelector(".pageLoading").classList.add("complete");
+    					document.querySelector("#swiperContainer").classList.add("complete");
+    					clearInterval(timer);
+  					}
+				},30)*/
+
+		// loading2
+	
+
+	</script>
+
+</body>
+
+</html>

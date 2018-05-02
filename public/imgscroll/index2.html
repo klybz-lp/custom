@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<title>图片下拉加载</title>
+	<link rel="stylesheet" href="css/index.css">
+	<script>
+		(function(){  
+			setRem() //打开页面及刷新页面的时候触发
+			//Orientation模块管理设备的方向信息，即判断横竖屏，只有手机端window才有该事件，如果是pc端则执行resize事件	
+			window.addEventListener("orientation" in window ? "deviceorientation" : "resize", setRem, false);  
+			function setRem(){
+				var colCount = 16;   //如果是640px的设计稿则1rem=640/16为40px
+				var html =  document.documentElement; 
+				var hWidth = html.getBoundingClientRect().width;	
+				html.style.fontSize = hWidth/colCount + "px";
+			}
+		})();  
+	</script>
+</head>
+<body>
+	<header id="header">
+		<h1>广州美莱集团</h1>
+	</header>
+
+	<div id="box">
+		<ul id="list">
+			<li><img src="images/iphone1.jpg" alt=""></li>
+			<li><img src="images/iphone2.jpg" alt=""></li>
+			<li><img src="images/iphone3.jpg" alt=""></li>
+			<li><img src="images/iphone4.jpg" alt=""></li>
+			<li><img src="images/iphone5.jpg" alt=""></li>
+			<li><img src="images/iphone6.jpg" alt=""></li>
+		</ul>
+	</div>
+	<section id="imgPage">
+		<header id="header">
+			<h1>大图预览<a href="javascript:void(0)" id="backBtn"><</a></h1>
+		</header>
+		<div class="imgWrap">
+			<img src="images/iphone1.jpg" alt="" id="bigImg">
+			<nav id="imgNavs">
+				<a href="javascript:void(0)">向左旋转90</a>
+				<a href="javascript:void(0)">向右旋转90</a>
+				<a href="javascript:void(0)">放大</a>
+				<a href="javascript:void(0)">缩小</a>
+			</nav>
+		</div>
+	</section>
+	<script src="js/tool.js"></script>
+	<!-- <script src="js/index.js"></script> -->
+	<script>
+	document.addEventListener('touchstart', function(e) {
+		e.preventDefault();
+	});
+
+	window.onload = function(){
+		var box = document.querySelector("#box");
+		setBigImg()
+	}
+
+	//操作图片函数
+	function setBigImg(){
+		var bigImg = document.querySelector("#bigImg");
+		var navs = document.querySelectorAll("#imgNavs a");
+		var startRotate = 0; //两根手指起始旋转角度
+		var startScale = 0; //两根手指起始缩放比例
+		var maxScale = 1.5; //最大缩放比，屏幕尺寸是16rem，图片尺寸是10rem，最大使图片不超出边界
+		var minScale = 0.5; //最小缩放比
+		cssTooL(bigImg, "translateZ", 0.01);  //开启3D加速，提高性能
+		cssTooL(bigImg,"rotate",0);
+		cssTooL(bigImg,"scale",100); //工具函数里是先除以100获取
+		setGesture({
+			el : bigImg,
+			start : function(e){
+				startRotate = cssTooL(this,"rotate");
+				startScale = cssTooL(this,"scale")/100;
+			},
+			change : function(e){
+				var scale = startScale * e.scale;
+				if (scale > maxScale) {
+					scale = maxScale;
+				} else if (scale < minScale) {
+					scale = minScale;
+				}
+				cssTooL(this, "scale", scale*100);
+				cssTooL(this, "rotate", startRotate + e.rotation);
+			},
+			end : function(e){
+				//图片旋转角度为90度的N倍，使图片摆正
+				var deg = cssTooL(this,"rotate");
+				deg = Math.round(deg/90);  //判断旋转了几个90deg
+				deg = deg * 90;
+				startMove({
+					el: this,
+					target:{rotate: deg},
+					type: "easeBoth",
+					time: 300
+				});
+			}
+		})
+
+		//向左旋转
+		navs[0].addEventListener("touchend",function(){
+			var deg = cssTooL(bigImg,"rotate");
+			deg = Math.round(deg/90) - 1;  //判断旋转了几个90deg
+			deg = deg * 90;
+			startMove({
+				el: bigImg,
+				target:{rotate: deg},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+
+		//向左旋转
+		navs[0].addEventListener("touchend",function(){
+			var deg = cssTooL(bigImg,"rotate");
+			deg = Math.round(deg/90) - 1;  //判断旋转了几个90deg
+			deg = deg * 90;
+			startMove({
+				el: bigImg,
+				target:{rotate: deg},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+
+		//向右旋转
+		navs[1].addEventListener("touchend",function(){
+			var deg = cssTooL(bigImg,"rotate");
+			deg = Math.round(deg/90) + 1;  //判断旋转了几个90deg
+			deg = deg * 90;
+			startMove({
+				el: bigImg,
+				target:{rotate: deg},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+
+		//放大
+		navs[2].addEventListener("touchend",function(){
+			var scale = cssTooL(bigImg, "scale")/100;
+			scale += 0.1;
+			if (scale > maxScale) {
+				scale = maxScale;
+			}
+			startMove({
+				el: bigImg,
+				target:{scale: scale*100},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+
+		//缩小
+		navs[3].addEventListener("touchend",function(){
+			var scale = cssTooL(bigImg, "scale")/100;
+			scale -= 0.1;
+			if (scale < minScale) {
+				scale = minScale;
+			}
+			startMove({
+				el: bigImg,
+				target:{scale: scale*100},
+				type: "easeBoth",
+				time: 300
+			});
+		},false)
+	}
+
+	//设置多指操作事件，兼容ios、andiros
+	/**
+	 init:{
+		el : element, //操作的元素(必选参数)
+		start : fn, //gesturestart触发的回调函数
+		change : fn, //gesturechange触发的回调函数
+		end : fn, //gestureend触发的回调函数
+	 }
+	**/
+	function setGesture(init){
+
+		var el = init.el;
+		var istGesture = false; //判断是否进行多指操作
+		var startPoint = []; //屏幕上每根手指的坐标
+		if (!el) {
+			return;
+		}
+
+		el.addEventListener("touchstart", function(e){
+			//var touch = e.changedTouches[0];
+			if (e.touches.length >= 2) {  //触摸的手指大于等于了两根
+				istGesture = true; 
+				startPoint[0] = {x: e.touches[0].pageX,y: e.touches[0].pageY}; //第一根手指的坐标
+				startPoint[1] = {x: e.touches[1].pageX,y: e.touches[1].pageY}; //第二根手指的坐标
+				init.start&&init.start.call(el,e); //call修改this的指向为el，把事件对象e也传递过去
+			}
+		}, false)
+
+		el.addEventListener("touchmove", function(e){
+			//触发过start事件
+			if (istGesture && e.touches.length >= 2) {
+				var nowPoint = []; //当前屏幕上每根手指的坐标
+				nowPoint[0] = {x: e.touches[0].pageX,y: e.touches[0].pageY}; //第一根手指的坐标
+				nowPoint[1] = {x: e.touches[1].pageX,y: e.touches[1].pageY}; //第二根手指的坐标
+				var startDis = getDis(startPoint[0], startPoint[1]);  //两根手指的前后的长度
+				var startDeg = getDis(startPoint[0], startPoint[1]);  //两根手指的前后的旋转的角度
+				var nowDis = getDis(nowPoint[0], nowPoint[1]);  
+				var nowDeg = getDis(nowPoint[0], nowPoint[1]);  
+				e.scale = nowDis/startDis; //缩放比
+				e.rotation = nowDeg - startDeg; //旋转角度差
+				init.change&&init.change.call(el,e); 
+			}
+		}, false)
+
+		el.addEventListener("touchend", function(e){
+			//触发过start事件
+			if (istGesture) {
+				//e.touches.length < 2当前屏幕上的手指小于2，e.targetTouches.length < 1当前元素上的手指小于1
+				if (e.touches.length < 2 || e.targetTouches.length < 1) { 
+					istGesture = false; 
+					init.end&&init.end.call(el,e); 
+				}
+			}
+		}, false)
+
+
+	}
+	//勾股定理：已知直角三角形的两条边长度，求斜边的长度；斜边 = 边1的平方+边2的平方然后开平方根
+	function getDis(point1, point2){
+		var x = point2.x -point1.x;
+		var y = point2.y -point1.y;
+		return Math.sqrt(x*x + y*y);
+	}
+	//Math.atan2()斜率，由一条直线与x轴正方向所形成的角的正切，返回值是一个弧度，需转成角度
+	function getDeg(point1, point2){
+		var x = point2.x -point1.x;
+		var y = point2.y -point1.y;
+		return Math.atan2(y, x)*180/Math.PI; //返回值是一个弧度，需转成角度
+	}
+	</script>
+</body>
+</html>

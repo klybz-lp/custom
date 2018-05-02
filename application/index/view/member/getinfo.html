@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>现场辅助功能</title>
+    <style>
+        *{ margin:0; padding:0}
+        input{ border:1px solid #000; height:30px; line-height:30px;}
+        td{ border:1px solid #ccc; text-align:center}
+        .fields p{ padding:10px; border:1px solid #000}
+        a{ text-decoration:none}
+        a.tit{ font-size:16px; font-weight:bold;  padding:5px; background:#000000; color:#fff; width:100px; float:left; border-right:1px solid #fff; text-align:center; height:30px; line-height:30px;}
+        a.on{ background:red}
+
+        .kefu{ padding:10px; width:120px; float:left}
+    </style>
+
+</head>
+<body>
+
+<div style="padding-top:20px;">
+    {switch name=$type }
+    {case value="电话"}
+    <p style="text-align:center">按电话号码查询顾客信息</p>
+    <form name="form" action="" method="post">
+        <p style="text-align:center; margin-top:10px;">
+            电话号码：<input type="text" name="tel" style="width:100px"/>
+            <input type="submit" value="提交" style="width:50px"></p>
+    </form>
+    {/case}
+    {case value="姓名"}
+    <p style="text-align:center">按顾客名称查询顾客信息</p>
+    <form name="form" action="" method="post">
+        <p style="text-align:center; margin-top:10px;">
+            电话号码：<input type="text" name="name" style="width:100px"/>
+            <input type="submit" value="提交" style="width:50px"></p>
+    </form>
+    {/case}
+    {case value="座位"}
+    <p style="text-align:center">按顾客名称查询顾客信息</p>
+    <form name="form" action="" method="post">
+        <p style="text-align:center; margin-top:10px;">
+            电话号码：<input type="text" name="number" style="width:100px"/>
+            <input type="submit" value="提交" style="width:50px"></p>
+    </form>
+    {/case}
+    {default /}
+    <p style="text-align:center">按电话号码查询顾客信息</p>
+    <form name="form" action="" method="post">
+        <p style="text-align:center; margin-top:10px;">
+            电话号码：<input type="text" name="tel" style="width:100px"/>
+            <input type="submit" value="提交" style="width:50px"></p>
+    </form>
+    {/switch}
+</div>
+
+</body>
+</html>

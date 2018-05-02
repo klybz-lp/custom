@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>网站管理系统-后台登录</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<style>
+		body{background: url(images/bg.jpg) 50% 0 no-repeat;}
+	</style>
+</head>
+<body>
+
+	<div class="container login">
+		<h1>网站管理系统-后台登录<sup>V2017</sup></h1>
+		<div id="login">
+			<form action="?action=login" name="login" method="post" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">账号：</label>
+				<div class="col-sm-9">
+					<input type="text" name="user_name" class="form-control" placeholder="请输入您的账号">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">密码：</label>
+				<div class="col-sm-9">
+					<input type="password" name="user_pass" class="form-control" placeholder="请输入您的密码">
+				</div>
+			</div>
+			<div class="checkbox pull-right">
+				<label>
+					<input type="checkbox">记住我
+				</label>
+			</div>
+			<div class="clearfix"></div>
+			<button class="btn btn-primary center-block" style="padding: 6px 40px;margin-top:10px;">登 录</button>
+			</form>
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+		$(function(){
+			$('.btn').click(function(){
+				var user_name = $(":input[name='user_name']");
+				var user_pass = $(":input[name='user_pass']");
+
+				if(user_name.val()==""){
+					alert("请输入用户名");
+					user_name.focus();
+					return false;
+				}
+
+				if(user_name.val().length<2 || user_name.val().length>20 ){
+					alert("用户名必须在2到20位之间")
+					user_name.focus();
+					return false;
+				}
+
+				if(user_pass.val().length!=6){
+					alert("密码必须为6位")
+					user_pass.focus();
+					return false;
+				}
+
+				return true;
+
+				
+			})
+			
+		})
+
+	</script>
+</body>
+</html>

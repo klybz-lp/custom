@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="/favicon.ico" >
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!--[if lt IE 9]>
+    {js href="__STATIC__/lib/html5shiv.js" /}
+    {js href="__STATIC__/lib/respond.min.js" /}
+    <![endif]-->
+    {css href="__STATIC__/static/h-ui/css/H-ui.min.css" /}
+    {css href="__STATIC__/static/h-ui.admin/css/H-ui.admin.css" /}
+    {css href="__STATIC__/lib/Hui-iconfont/1.0.8/iconfont.css" /}
+    {css href="__STATIC__/static/h-ui.admin/skin/default/skin.css" /}
+    {css href="__STATIC__/static/h-ui.admin/css/style.css" /}
+    <!--导入boostrap-->
+    {css href="__STATIC__/lib/bootstrap/css/bootstrap.min.css" /}
+    <!--[if IE 6]>
+    {js href="__STATIC__/lib/DD_belatedPNG_0.0.8a-min.js" /}
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    {block name="seo"}
+    {/block}
+</head>
+<body>
+{block name='header'}
+{include file='public/header' /}
+{/block}
+{block name='aside'}
+{include file='public/aside' /}
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+{/block}
+{block name="content"}
+页面右侧主体内容
+{/block}
+
+{include file="public/footer" /}
+<div class="contextMenu" id="Huiadminmenu" style="opacity: 0;">
+    <ul>
+        <li id="closethis">关闭当前 </li>
+        <li id="closeall">关闭全部 </li>
+    </ul>
+</div>
+{block name='js'}
+{/block}
+</body>
+</html>

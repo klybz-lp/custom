@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<title>淘宝</title>
+	<script>
+		(function(){  
+			var colCount = 15;   //推荐设计稿用750px，colCount为15,1rem为50px
+			var html =  document.documentElement; 
+			var hWidth = html.getBoundingClientRect().width;	
+			html.style.fontSize = hWidth/colCount + "px";
+		})();  
+	</script>
+	<style>
+	html {
+	  -webkit-text-size-adjust: 100%;
+	  -ms-text-size-adjust: 100%;
+	}
+	a,
+	input,
+	button {
+	  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+	div,
+	span{
+	  margin: 0;
+	  padding: 0;
+	}
+	a {
+	  text-decoration: none;
+	}
+	a:focus {
+	  outline: none;
+	  -moz-outline: none;
+	}
+	ul,
+	li {
+	  margin: 0;
+	  padding: 0;
+	  list-style: none;
+	}
+	img {
+	  vertical-align: top;
+	  /*移动端除去图片边框*/
+	}
+	body * {
+	  -webkit-user-select: none;
+	  font-family: Helvetica;
+	}
+	body {
+	  margin: 0;
+	  -webkit-user-select: none;
+	  /*禁止用户选择文本*/
+	  -webkit-text-size-adjust: 100%;
+	  /*禁止横竖屏切换时的字体改变*/
+	}
+	/*新旧版弹性盒模型一起使用，提高兼容性*/
+	.rows{
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		padding: 0.4rem 0.5rem 0;
+	}
+	.rows div{
+		width: 0px; /*避免每个元素的宽度不一致(如字体个数不同等)，而导致flex-grow属性不能使每个元素大小保持一致*/
+		-webkit-box-flex:1;
+		flex-grow: 1;
+	}
+	.rows div a{
+		font-size: 0.64rem;
+		color:#666;
+		text-align: center;
+		line-height: 1rem;
+		display: block;
+	}
+	.rows div a:before{
+		content: "";
+		display: block;
+		margin: 0 auto;
+		width: 1.7rem;
+		height: 1.7rem;
+		background: #000;
+		border-radius: 50%;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="rows">
+		<div><a href="javascript:void(0)">天猫</a></div>
+		<div><a href="javascript:void(0)">聚划算</a></div>
+		<div><a href="javascript:void(0)">天猫国际</a></div>
+		<div><a href="javascript:void(0)">天猫超市</a></div>
+		<div><a href="javascript:void(0)">外卖</a></div>
+	</div>
+	<div class="rows">
+		<div><a href="javascript:void(0)">天猫</a></div>
+		<div><a href="javascript:void(0)">聚划算</a></div>
+		<div><a href="javascript:void(0)">天猫国际</a></div>
+		<div><a href="javascript:void(0)">天猫超市</a></div>
+		<div><a href="javascript:void(0)">外卖</a></div>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,190 @@
+{extend name="public/base" /}
+{block name="seo"}
+<title>{$title|default="邀约系统数据管理后台"}</title>
+<meta name="keywords" content="{keywords|default='数据管理后台'}">
+<meta name="description" content="{description|default='数据管理后台'}">
+<style type="text/css">
+	.form label {text-align: right !important;}
+</style>
+{/block}
+<!--block标签里不写内容则表示去掉基础模板里部分内容-->
+{block name='header'}{/block}
+{block name='aside'}{/block}
+{block name="content"}
+<article class="page-container">
+	<form class="form form-horizontal" id="form-member-edit">
+		<input type="hidden" name="id" value="{$member_info.id}">
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">* </span>顾客姓名：</label>
+			<div class="formControls col-xs-7 col-sm-8">
+				<input type="text" class="input-text" value="{$member_info.name}" placeholder="" id="name" name="name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>顾客电话：</label>
+			<div class="formControls col-xs-7 col-sm-8">
+				<input type="text" class="input-text" value="{$member_info.tel}" placeholder="" id="tel" name="tel">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>邀约人：</label>
+			<div class="formControls col-xs-7 col-sm-8">
+				<input type="text" class="input-text" value="{$member_info.yaoyue}" placeholder="" id="yaoyue"
+					   name="yaoyue">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">现场客服：</label>
+			<div class="formControls col-xs-7 col-sm-8">
+				<input type="text" class="input-text" value="{$member_info.kefu}" placeholder="" id="kefu" name="kefu">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">顾客级别：</label>
+			<div class="formControls col-xs-7 col-sm-8"> <span class="select-box" style="width:150px;">
+			<select class="select" name="type" size="1" id="type">
+				{switch name="$member_info.type"}
+					{case value="新客(普通)"}
+				    <option selected="selected" value="新客(普通)">新客(普通)</option>
+					<option value="新客(重要)">新客(重要)</option>
+					<option value="老客(普通)">老客(普通)</option>
+					<option value="老客(重要)">老客(重要)</option>
+				    {/case}
+					{case value="新客(重要)"}
+				    <option value="新客(普通)">新客(普通)</option>
+					<option selected="selected" value="新客(重要)">新客(重要)</option>
+					<option value="老客(普通)">老客(普通)</option>
+					<option value="老客(重要)">老客(重要)</option>
+				    {/case}
+					{case value="老客(普通)"}
+				    <option value="新客(普通)">新客(普通)</option>
+					<option value="新客(重要)">新客(重要)</option>
+					<option selected="selected" value="老客(普通)">老客(普通)</option>
+					<option value="老客(重要)">老客(重要)</option>
+				    {/case}
+					{case value="老客(重要)"}
+				    <option value="新客(普通)">新客(普通)</option>
+					<option value="新客(重要)">新客(重要)</option>
+					<option value="老客(普通)">老客(普通)</option>
+					<option selected="selected" value="老客(重要)">老客(重要)</option>
+				    {/case}
+				{/switch}
+			</select>
+			</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">备注：</label>
+			<div class="formControls col-xs-7 col-sm-8">
+				<textarea name="remark" cols="" rows="" class="textarea valid" placeholder="说点什么...最多输入200个字符"  aria-invalid="false">{$member_info.remark}</textarea>
+				<!--<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>-->
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-7 col-sm-8 col-xs-offset-3 col-sm-offset-2">
+				<input class="btn btn-primary radius disabled" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" id="submit">
+			</div>
+		</div>
+	</form>
+</article>
+{/block}
+{block name='js'}
+<script type="text/javascript">
+	$(function(){
+
+		//防止用户无更新提交,只有表中数据有变化时才允许提交
+		$("form").children().change(function(){
+			$("#submit").removeClass('disabled');
+		});
+
+		//失去焦点时,检查手机号码是否重复
+		$("#tel").blur(function(){
+			check_exist('checkPhone',{tel:$(this).val()},'电话号码')
+		});
+
+        //检查数据是否已经被注册
+		function check_exist(url,obj,msg) {
+			$.ajax({
+				type: 'GET',
+				url: url,
+				data:obj,
+				dataType: 'json',
+				success: function(data){
+					if (data == 1) {
+						layer.msg(msg+'已被占用!',{icon:2,time:1000});
+					}
+				}
+			});
+		}
+		$("#submit").on("click", function(event){
+			var index = parent.layer.getFrameIndex(window.name);
+			var name = $('input[name=name]');
+			var tel = $('input[name=tel]');
+			var yaoyue = $('input[name=yaoyue]');
+			var kefu = $('input[name=kefu]');
+			var type = $('input[name=type]');
+			var remark = $('select[name=remark]');
+
+			if(name.val() == ''){
+				layer.msg('用户名不得为空!',{icon:2,time:1000});
+				return;
+			}
+			if(name.val().length <2 || name.val().length > 20){
+				layer.msg('名称长度必须在2到20位之间!',{icon:2,time:1000});
+				return;
+			}
+			if(!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(name.val())){
+				layer.msg('名称格式不正确!',{icon:2,time:1000});
+				return;
+			}
+			if(tel.val() == ''){
+				layer.msg('电话号码不得为空!',{icon:2,time:1000});
+				return;
+			}
+			if(!/^1\d{10}$/.test(tel.val())){
+				layer.msg('电话号码格式不正确!',{icon:2,time:1000});
+				return;
+			}
+			if(yaoyue.val() == ''){
+				layer.msg('邀约人不得为空!',{icon:2,time:1000});
+				return;
+			}
+			/*if(kefu.val() == ''){
+				layer.msg('现场客服不得为空!',{icon:2,time:1000});
+				return;
+			}*/
+
+			$.ajax({
+				type: "POST",
+				url: "{:url('member/update')}",
+				data: $("#form-member-edit").serialize(),
+				dataType: "json",
+				beforeSend: function (data) {
+					//$("#modal-info").modal("show")
+				},
+				success: function(data, response, status) {
+					if (data == 1) {
+						layer.msg('数据修改成功!',{icon:1,time:1000});
+						setTimeout(function () {
+							parent.document.getElementById('btn-refresh').click();
+						},500)
+					} else if(data == -1) {
+						layer.msg('电话号码已被注册!',{icon:2,time:2000});
+					} else {
+						layer.msg('数据修改失败!',{icon:2,time:1000});
+
+					}
+				}
+			});
+
+		})
+
+		//表单元素效果，如checkbox、radio等
+		$('.skin-minimal input').iCheck({
+			checkboxClass: 'icheckbox-blue',
+			radioClass: 'iradio-blue',
+			increaseArea: '20%'
+		});
+
+	});
+</script>
+{/block}
